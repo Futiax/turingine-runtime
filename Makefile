@@ -17,7 +17,7 @@ LIB_OBJ := $(OBJ_DIR)/display/drm_display.o $(OBJ_DIR)/input/evdev_input.o
 LIB_ARCHIVE := $(OUT_DIR)/libturingine.a
 
 # ── Applications ──
-APPS := homescreen x11_bridge terminal
+APPS := homescreen x11_bridge terminal graph
 APP_BINS := $(patsubst %,$(BIN_DIR)/%,$(APPS))
 
 all: $(LIB_ARCHIVE) $(APP_BINS)
@@ -49,6 +49,9 @@ TERM_SRC := apps/terminal/main.c apps/terminal/term_render.c \
 
 $(BIN_DIR)/terminal: $(TERM_SRC) $(LIB_ARCHIVE) | $(BIN_DIR)
 	$(CC) $(CFLAGS) -Iapps/terminal -o $@ $(TERM_SRC) $(LIB_ARCHIVE) $(LDFLAGS) $(EVDEV_LIBS) -lutil
+
+$(BIN_DIR)/graph: apps/Grapher/graph.cpp $(LIB_ARCHIVE) | $(BIN_DIR)
+	$(CXX) $(CFLAGS) -DSIZEOF_VOID_P=8 -o $@ $^ $(LDFLAGS) $(EVDEV_LIBS) -lgiac
 
 # Création des dossiers
 $(OBJ_DIR)/display $(OBJ_DIR)/input $(BIN_DIR):

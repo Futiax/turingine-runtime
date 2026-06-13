@@ -28,6 +28,7 @@ char prompt_str[256] = "root@turingine:~# ";
  * ══════════════════════════════════════════════════════════════ */
 
 void detect_default_user(void) {
+  /* 1. Lecture ligne par ligne de /etc/passwd */
   FILE *f = fopen("/etc/passwd", "r");
   if (!f) {
     printf("detect_default_user: impossible d'ouvrir /etc/passwd\n");
@@ -36,7 +37,7 @@ void detect_default_user(void) {
 
   char line[512];
   while (fgets(line, sizeof(line), f)) {
-    /* Découpage manuel par ':' (strtok fusionne les champs vides) */
+    /* 2. Découpage manuel par ':' (strtok fusionne les champs vides) */
     char *fields[7] = {0};
     char *cur = line;
     for (int i = 0; i < 7 && cur; i += 1) {
@@ -57,6 +58,7 @@ void detect_default_user(void) {
     if (!fields[0] || !fields[2] || !fields[5])
       continue;
 
+    /* 3. Premier utilisateur humain (UID 1000-65533) → mettre à jour les variables globales */
     int uid = atoi(fields[2]);
     if (uid >= 1000 && uid < 65534) {
       snprintf(user_name, sizeof(user_name), "%s", fields[0]);
@@ -69,7 +71,7 @@ void detect_default_user(void) {
   }
   fclose(f);
 
-  /* Déplacer le processus dans le répertoire de l'utilisateur */
+  /* 4. Placer le processus dans le répertoire home pour que les chemins relatifs fonctionnent */
   if (chdir(user_home) != 0)
     printf("Attention: impossible de chdir vers %s\n", user_home);
 }
@@ -153,6 +155,7 @@ pid_t pty_child = -1;
  * pty_fd et pty_child sont mis à jour.
  * La boucle principale gère les I/O. */
 void run_command(const char *cmd) {
+  /* 1. Configurer la taille du terminal virtuel avant le fork */
   struct winsize ws = {
     .ws_row = ROWS,
     .ws_col = COLS,
@@ -160,6 +163,7 @@ void run_command(const char *cmd) {
     .ws_ypixel = 0,
   };
 
+  /* 2. Créer un PTY et forker : forkpty() ouvre master+slave et fait le fork atomiquement */
   pid_t pid = forkpty(&pty_fd, NULL, NULL, &ws);
   if (pid < 0) {
     term_print("Erreur: forkpty() a echoue\n");
@@ -169,27 +173,27 @@ void run_command(const char *cmd) {
 
   if (pid == 0) {
     /* ── Processus enfant ── */
-    /* Préparer les variables d'environnement */
+
+    /* 3a. Environnement : exporter les variables attendues par bash et les apps */
     setenv("HOME",    user_home, 1);
     setenv("USER",    user_name, 1);
     setenv("LOGNAME", user_name, 1);
     setenv("TERM",    "xterm",   1);
 
-    /* Se placer dans le bon répertoire */
+    /* 3b. Répertoire courant */
     if (chdir(user_cwd) != 0) {
       /* Silencieux — le shell le signalera lui-même si besoin */
     }
 
-    /* Exécuter via bash -c */
+    /* 3c. Remplacer le processus par bash */
     execl("/bin/bash", "bash", "-c", cmd, NULL);
-    /* Si execl échoue */
-    _exit(127);
+    _exit(127); /* Atteint seulement si execl échoue */
   }
 
   /* ── Processus parent ── */
-  pty_child = pid;
 
-  /* Mettre le fd en mode non-bloquant */
+  /* 4. Mettre le fd master en non-bloquant pour les lectures dans la boucle principale */
+  pty_child = pid;
   int flags = fcntl(pty_fd, F_GETFL, 0);
   fcntl(pty_fd, F_SETFL, flags | O_NONBLOCK);
 }

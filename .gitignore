@@ -28,6 +28,21 @@
 *.out
 *.a
 
+# Binaires compilés sans extension (build standalone hors Makefile)
+apps/Grapher/graph
+
+# Résultats de benchmark et fichiers CSV temporaires
+*.csv
+
+# Répertoire de sauvegarde local
+backup/
+
+# Fichier de configuration clangd (généré par l'IDE, local)
+compile_flags.txt
+
+# Fichiers temporaires dans .vscode (screenshots, etc.)
+.vscode/*.png
+
 # Ignore hidden directories
 .*/
 !.vscode/

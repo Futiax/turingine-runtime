@@ -943,6 +943,239 @@ int main() {
 
 ---
 
+## Partie 10 — Extension : Zoom, Déplacement et Interface de Saisie (UI)
+
+Cette partie bonus te guide pour transformer ton grapheur statique en une véritable application interactive. Tu vas utiliser `evdev_input` pour :
+1. **Zoomer** et **te déplacer** dans le plan mathématique en temps réel avec les touches.
+2. **Saisir des fonctions au clavier** directement sur la calculatrice avec un champ d'édition de texte à l'écran, sans jamais devoir recompiler le code.
+
+---
+
+### Exercice 10.1 — Rendre le Viewport Dynamique
+
+Pour zoomer ou déplacer la caméra, il suffit de modifier les limites mathématiques (`x_min`, `x_max`, `y_min`, `y_max`) du `Viewport` et de redessiner l'image.
+
+Ajoute ces méthodes à ta structure `Viewport` (ou implémente-les sous forme de fonctions libres dans ton code) :
+
+```cpp
+// 1. Déplacement (Pan)
+void pan(double dx, double dy) {
+    x_min += dx;
+    x_max += dx;
+    y_min += dy;
+    y_max += dy;
+}
+
+// 2. Zoom uniforme autour du centre de l'écran
+void zoom(double factor) {
+    double x_center = (x_min + x_max) / 2.0;
+    double y_center = (y_min + y_max) / 2.0;
+    double x_half_range = (x_max - x_min) * factor / 2.0;
+    double y_half_range = (y_max - y_min) * factor / 2.0;
+
+    x_min = x_center - x_half_range;
+    x_max = x_center + x_half_range;
+    y_min = y_center - y_half_range;
+    y_max = y_center + y_half_range;
+}
+
+// 3. Étirement (Stretch) horizontal ou vertical indépendant
+void stretch_x(double factor) {
+    double x_center = (x_min + x_max) / 2.0;
+    double x_half_range = (x_max - x_min) * factor / 2.0;
+    x_min = x_center - x_half_range;
+    x_max = x_center + x_half_range;
+}
+
+void stretch_y(double factor) {
+    double y_center = (y_min + y_max) / 2.0;
+    double y_half_range = (y_max - y_min) * factor / 2.0;
+    y_min = y_center - y_half_range;
+    y_max = y_center + y_half_range;
+}
+```
+
+**À faire** :
+* Ajoute ces fonctions et valide leur comportement en effectuant un déplacement initial ou un zoom dans ton `main()` avant le tracé.
+
+---
+
+### Exercice 10.2 — Piloter la vue au clavier (evdev)
+
+Tu vas maintenant écouter les touches du clavier de la calculatrice via `evdev_input` dans ta boucle principale.
+
+1. **Flèches directionnelles** (`KEY_UP`, `KEY_DOWN`, `KEY_LEFT`, `KEY_RIGHT`) : déplacer la vue (pan).
+2. **Touches `+` / `-`** (ou `KEY_KPPLUS`, `KEY_KPMINUS`) : zoomer (zoom in / zoom out).
+3. **Touches `[` / `]`** (ou `KEY_LEFTBRACE`, `KEY_RIGHTBRACE`) : étirer / compresser l'axe horizontal X.
+
+A chaque touche détectée :
+1. Tu appliques la transformation au `Viewport`.
+2. Tu demandes un rafraîchissement en recalculant tout le tracé (grille, axes, courbes).
+3. Tu appelles `drm_display_blit_argb32` et `drm_display_present` pour rafraîchir l'écran.
+
+> [!TIP]
+> Calcule le pas de déplacement proportionnellement à la taille courante de la vue pour que le déplacement reste fluide et adapté, quelle que soit l'échelle :
+> `double step_x = (vp.x_max - vp.x_min) * 0.1;`
+
+---
+
+### Exercice 10.3 — Saisie de fonction en temps réel (UI)
+
+Pour éviter de recompiler, on va ajouter une zone de texte à l'écran (un bandeau noir en bas de la fenêtre) et écouter les caractères tapés.
+
+Bonne nouvelle : nous avons directement complété notre bibliothèque `evdev_input` avec une fonction `evdev_code_to_ascii(int code, int shift)` qui gère la conversion des codes touches du noyau Linux (lettres, chiffres, opérateurs et le modificateur `Shift`) en caractères ASCII.
+
+Il suffit donc d'utiliser la logique de saisie suivante :
+1. Déclare une chaîne `std::string input_buffer = "";` pour stocker la saisie courante.
+2. Déclare un booléen `bool is_typing = false;` (la touche `KEY_TAB` bascule entre le mode "Navigation" et le mode "Saisie").
+3. En mode **Saisie** :
+   - Si la touche lue est `KEY_BACKSPACE`, supprime le dernier caractère : `if(!input_buffer.empty()) input_buffer.pop_back();`
+   - Si la touche lue est `KEY_ENTER`, ajoute la fonction saisie à Giac :
+     ```cpp
+     if (!input_buffer.empty()) {
+         functions.push_back({GiacFunction(input_buffer, &ctx), 2, true, PALETTE[functions.size() % 8], true, 0, false, 0});
+         input_buffer.clear();
+         is_typing = false; // Retour à la navigation
+     }
+     ```
+   - Sinon, convertis la touche en ASCII avec `evdev_code_to_ascii(code, shift_pressed)` et ajoute le caractère non nul obtenu à `input_buffer`.
+
+4. **Affichage à l'écran** :
+   - Dessine un bandeau en bas de ton écran (ex: rectangle noir opaque de hauteur 40px couvrant toute la largeur).
+   - Utilise ta fonction de dessin de texte pour écrire le buffer à l'écran (ex: `"Saisie f(x) : " + input_buffer`).
+
+---
+
+### Exercice 10.4 — Boucle interactive finale
+
+Voici l'architecture simplifiée et recommandée pour ta boucle interactive dans `graph.cpp` :
+
+```cpp
+#include <unistd.h>
+extern "C" {
+#include "drm_display.h"
+#include "evdev_input.h"
+}
+
+// ... Tes fonctions de tracé (plot_multiple, etc.) ...
+
+int main() {
+    struct drm_display drm;
+    uint32_t scr_w, scr_h, stride;
+    if (drm_display_init(&drm, &scr_w, &scr_h, &stride) != 0) return 1;
+
+    Image img(scr_w, scr_h);
+    Viewport vp(-10.0, 10.0, -10.0, 10.0, scr_w, scr_h);
+    context ctx;
+
+    std::vector<FancyFunction> functions;
+    functions.push_back({GiacFunction("sin(x)", &ctx), 2, true, PALETTE[0], true, 0, false, 0});
+
+    struct input_devices in_devs;
+    input_devices_detect(&in_devs);
+
+    std::string input_buffer = "";
+    bool is_typing = false;
+    bool shift_pressed = false;
+    bool needs_redraw = true;
+
+    while (true) {
+        if (needs_redraw) {
+            // 1. Dessine le graphique
+            plot_multiple(img, vp, functions, ctx);
+
+            // 2. Dessine le bandeau d'UI en bas (ex: hauteur 40 pixels)
+            int ui_y = scr_h - 40;
+            // draw_rect / fill_rect sur ton image...
+            
+            if (is_typing) {
+                std::string ui_str = "Entree f(x) : " + input_buffer + "_";
+                // draw_string(img, 10, ui_y + 12, ui_str, 0xFFFFFFFF);
+            } else {
+                std::string ui_str = "[TAB] Entrer fonction | [Esc] Quitter | Fleches: Naviguer | +/-: Zoom";
+                // draw_string(img, 10, ui_y + 12, ui_str, 0xFF888888);
+            }
+
+            // 3. Envoie au framebuffer
+            drm_display_blit_argb32(&drm, img.pixels.data(), scr_w);
+            drm_display_present(&drm);
+            needs_redraw = false;
+        }
+
+        int code, value;
+        while (input_devices_read_kb(&in_devs, &code, &value) > 0) {
+            // Détection shift (pour majuscules et opérateurs)
+            if (code == KEY_LEFTSHIFT || code == KEY_RIGHTSHIFT) {
+                shift_pressed = (value > 0);
+            }
+
+            if (value == 1) { // Touche enfoncée
+                if (code == KEY_ESC) {
+                    goto cleanup;
+                }
+                
+                if (code == KEY_TAB) {
+                    is_typing = !is_typing;
+                    needs_redraw = true;
+                }
+
+                if (is_typing) {
+                    if (code == KEY_BACKSPACE) {
+                        if (!input_buffer.empty()) input_buffer.pop_back();
+                        needs_redraw = true;
+                    } else if (code == KEY_ENTER || code == KEY_KPENTER) {
+                        if (!input_buffer.empty()) {
+                            functions.push_back({GiacFunction(input_buffer, &ctx), 2, true, PALETTE[functions.size() % 8], true, 0, false, 0});
+                            input_buffer.clear();
+                            is_typing = false;
+                        }
+                        needs_redraw = true;
+                    } else {
+                        char c = evdev_code_to_ascii(code, shift_pressed);
+                        if (c != 0) {
+                            input_buffer += c;
+                            needs_redraw = true;
+                        }
+                    }
+                } else {
+                    // Mode Navigation
+                    double step_x = (vp.x_max - vp.x_min) * 0.1;
+                    double step_y = (vp.y_max - vp.y_min) * 0.1;
+
+                    if (code == KEY_LEFT) {
+                        vp.pan(-step_x, 0);
+                        needs_redraw = true;
+                    } else if (code == KEY_RIGHT) {
+                        vp.pan(step_x, 0);
+                        needs_redraw = true;
+                    } else if (code == KEY_UP) {
+                        vp.pan(0, step_y);
+                        needs_redraw = true;
+                    } else if (code == KEY_DOWN) {
+                        vp.pan(0, -step_y);
+                        needs_redraw = true;
+                    } else if (code == KEY_MINUS || code == KEY_KPMINUS) {
+                        vp.zoom(1.1); // zoom arrière
+                        needs_redraw = true;
+                    } else if (code == KEY_EQUAL) {
+                        vp.zoom(0.9); // zoom avant
+                        needs_redraw = true;
+                    }
+                }
+            }
+        }
+        usleep(10000);
+    }
+
+cleanup:
+    input_devices_release(&in_devs);
+    drm_display_shutdown(&drm);
+    return 0;
+}
+```
+
+---
+
 ## Récapitulatif des concepts appris
 
 | Partie | Ce que tu as appris |
@@ -951,12 +1184,13 @@ int main() {
 | 1 | Framebuffer logiciel, format PPM, blending alpha |
 | 2 | Tracé de lignes : DDA (naïf) puis Wu (antialiasé) |
 | 3 | Viewport : mapping coordonnées mathématiques ↔ pixels |
-| 4 | **Giac** : parsing d'expressions, évaluation numérique, wrapper GiacFunction |
+| 4 | **Giac** : parsing d'expressions, éval numérique, wrapper GiacFunction |
 | 5 | Détection des discontinuités : heuristique + **analyse symbolique Giac** |
 | 6 | Échantillonnage adaptatif (subdivision récursive) |
 | 7 | Multi-fonctions avec palette de couleurs |
 | 8 | Épaisseur de trait |
 | 9 | Assemblage, **dérivée symbolique**, **saisie interactive** + intégration DRM |
+| 10 | **Zoom, déplacement interactif, gestion clavier evdev et saisie libre (UI)** |
 
 ---
 
@@ -964,10 +1198,8 @@ int main() {
 
 Quelques pistes pour améliorer ton moteur de tracé :
 
-- **Zoom interactif** : Utilise `evdev_input` pour détecter les touches et modifier le `Viewport` en temps réel
 - **Légende des courbes** : Dessine le nom de chaque fonction avec sa couleur (il te faut un moteur de texte, comme ton `font8x16.h`)
 - **Graduations numériques** : Affiche les valeurs `1`, `2`, `π`, etc. sur les axes
 - **Intégrales** : Utilise `_integrate` de Giac pour calculer et colorier l'aire sous une courbe
-- **Fonctions implicites** : Tracer $f(x,y) = 0$ en évaluant chaque pixel (marching squares)
 - **Tangente en un point** : Utilise `_diff` pour calculer la pente en un point et tracer la droite tangente
-- **Rendu GPU via shaders** : Évaluer la fonction par pixel dans un fragment shader avec `dFdx`/`dFdy` pour l'antialiasing (si jamais la Turingine utilise le GPU Mali-G31 du H618)
+- **Fonctions implicites** : Tracer $f(x,y) = 0$ en évaluant chaque pixel (marching squares)
