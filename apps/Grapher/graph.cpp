@@ -16,6 +16,7 @@
 
 extern "C" {
 #include "../../core/display/drm_display.h"
+#include "../../core/math_render/math_render.h"
 #include "evdev_input.h"
 }
 
@@ -200,6 +201,19 @@ struct Image {
     for (size_t i = 0; i < str.length(); i++) {
       draw_char(x + (int)i * char_w, y, str[i], color);
     }
+  }
+
+  // Rend un MathBox dans l'image. scale=2 pour correspondre à draw_char (2×).
+  void draw_mathbox(int x, int y, const MathBox *box, uint32_t color, int scale = 2) {
+    struct Ctx { Image *img; uint32_t color; };
+    Ctx ctx = {this, color};
+    mathbox_render_pixels(box, x, y,
+      [](int px, int py, int on, void *ud) {
+        if (on) {
+          auto *c = static_cast<Ctx *>(ud);
+          c->img->set_pixel(px, py, c->color);
+        }
+      }, &ctx, scale);
   }
 
   void draw_line(int x0, int y0, int x1, int y1, uint32_t color) {
@@ -1081,15 +1095,31 @@ static void render_list_overlay(AppState &s) {
     s.img.draw_string(box_x + 20, box_y + 60, "Aucune fonction enregistree.", 0xFF888888);
   } else {
     for (size_t i = 0; i < s.functions.size() && i < 12; i++) {
-      std::string prefix = ((int)i == s.list_cursor) ? "> " : "  ";
-      std::string info = prefix + s.functions[i].func.name;
-      if (s.functions[i].draw_f)
-        info += " [f]";
-      if (s.functions[i].draw_f_prime)
-        info += " [f']";
-      if (s.functions[i].draw_f_double_prime)
-        info += " [f'']";
-      s.img.draw_string(box_x + 20, box_y + 60 + (int)i * 24, info, s.functions[i].color_f);
+      int row_y = box_y + 60 + (int)i * 40;
+      uint32_t color = s.functions[i].color_f;
+
+      // Curseur de sélection
+      if ((int)i == s.list_cursor)
+        s.img.draw_string(box_x + 4, row_y + 8, ">", color);
+
+      // Rendu 2D du nom de la fonction
+      MathExpr *expr = math_parse(s.functions[i].func.name.c_str());
+      if (expr) {
+        MathBox *box = math_render(expr);
+        // Centre verticalement dans la ligne de 40px (cellule = 16*2=32px)
+        int math_y = row_y + (40 - mathbox_pixel_height(box, 2)) / 2;
+        s.img.draw_mathbox(box_x + 30, math_y, box, color, 2);
+        mathbox_free(box);
+        math_expr_free(expr);
+      } else {
+        s.img.draw_string(box_x + 30, row_y + 8, s.functions[i].func.name, color);
+      }
+
+      // Badges [f] [f'] [f'']
+      int badge_x = box_x + 30 + 200;
+      if (s.functions[i].draw_f)            s.img.draw_string(badge_x,      row_y + 8, "[f]",   color);
+      if (s.functions[i].draw_f_prime)      s.img.draw_string(badge_x + 56, row_y + 8, "[f']",  color);
+      if (s.functions[i].draw_f_double_prime) s.img.draw_string(badge_x+112, row_y + 8, "[f'']", color);
     }
   }
 
@@ -1099,8 +1129,21 @@ static void render_list_overlay(AppState &s) {
 }
 
 static void render_bottom_bar(AppState &s) {
-  int ui_y = s.scr_h - 40;
-  s.img.fill_rect(0, ui_y, s.scr_w, 40, 0xFF111111);
+  int bar_h = 40;
+  MathBox *preview_box = nullptr;
+
+  if (s.is_typing && !s.input_buffer.empty()) {
+    MathExpr *expr = math_parse(s.input_buffer.c_str());
+    if (expr) {
+      preview_box = math_render(expr);
+      math_expr_free(expr);
+      int ph = mathbox_pixel_height(preview_box, 2);
+      bar_h = std::max(40, ph + 16); // 8px marge haut + bas
+    }
+  }
+
+  int ui_y = s.scr_h - bar_h;
+  s.img.fill_rect(0, ui_y, s.scr_w, bar_h, 0xFF111111);
 
   if (s.is_selecting_checkboxes) {
     std::string opt0 = (s.checkbox_cursor == 0 ? "> " : "  ") + std::string(s.check_f ? "[X] " : "[ ] ") + "f(x)";
@@ -1109,11 +1152,28 @@ static void render_bottom_bar(AppState &s) {
     std::string str = "Plot " + s.input_buffer + ": " + opt0 + "   " + opt1 + "   " + opt2 + "  (Space: Toggle, Enter: OK)";
     s.img.draw_string(10, ui_y + 4, str, 0xFFFFFFFF);
   } else if (s.is_typing) {
-    std::string str = "Entree f(x) : " + s.input_buffer.substr(0, s.input_cursor) + "|" + s.input_buffer.substr(s.input_cursor);
-    s.img.draw_string(10, ui_y + 4, str, 0xFFFFFFFF);
+    std::string str = "f(x) = " + s.input_buffer.substr(0, s.input_cursor) + "|" + s.input_buffer.substr(s.input_cursor);
+
+    if (preview_box) {
+      int pw = mathbox_pixel_width(preview_box, 2);
+      int ph = mathbox_pixel_height(preview_box, 2);
+      // Centre le rendu dans la barre
+      int preview_x = s.scr_w - pw - 16;
+      int preview_y = ui_y + (bar_h - ph) / 2;
+      s.img.fill_rect(preview_x - 8, ui_y + 2, pw + 16, bar_h - 4, 0xFF1E2A3A);
+      s.img.draw_mathbox(preview_x, preview_y, preview_box, 0xFF4FC3F7, 2);
+
+      // Aligne le texte sur la baseline du rendu (centre visuel de l'expression)
+      int baseline_px = preview_y + preview_box->baseline * 16 * 2;
+      s.img.draw_string(10, baseline_px - 8, str, 0xFFFFFFFF);
+    } else {
+      s.img.draw_string(10, ui_y + (bar_h - 16) / 2, str, 0xFFFFFFFF);
+    }
   } else {
     s.img.draw_string(10, ui_y + 4, "[TAB] Fonction | [CAPSLOCK] Liste | [F5] Benchmark | [Esc] Quitter", 0xFF888888);
   }
+
+  if (preview_box) mathbox_free(preview_box);
 }
 
 static void present_frame(AppState &s) {

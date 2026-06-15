@@ -50,11 +50,16 @@ TERM_SRC := apps/terminal/main.c apps/terminal/term_render.c \
 $(BIN_DIR)/terminal: $(TERM_SRC) $(LIB_ARCHIVE) | $(BIN_DIR)
 	$(CC) $(CFLAGS) -Iapps/terminal -o $@ $(TERM_SRC) $(LIB_ARCHIVE) $(LDFLAGS) $(EVDEV_LIBS) -lutil
 
-$(BIN_DIR)/graph: apps/Grapher/graph.cpp $(LIB_ARCHIVE) | $(BIN_DIR)
-	$(CXX) $(CFLAGS) -DSIZEOF_VOID_P=8 -o $@ $^ $(LDFLAGS) $(EVDEV_LIBS) -lgiac
+MATH_RENDER_OBJ := $(OBJ_DIR)/math_render/render.o
+
+$(OBJ_DIR)/math_render/render.o: core/math_render/render.c core/math_render/math_render.h | $(OBJ_DIR)/math_render
+	$(CC) $(CFLAGS) -Icore/math_render -c $< -o $@
+
+$(BIN_DIR)/graph: apps/Grapher/graph.cpp $(MATH_RENDER_OBJ) $(LIB_ARCHIVE) | $(BIN_DIR)
+	$(CXX) $(CFLAGS) -DSIZEOF_VOID_P=8 -Icore/math_render -o $@ $^ $(LDFLAGS) $(EVDEV_LIBS) -lgiac
 
 # Création des dossiers
-$(OBJ_DIR)/display $(OBJ_DIR)/input $(BIN_DIR):
+$(OBJ_DIR)/display $(OBJ_DIR)/input $(OBJ_DIR)/math_render $(BIN_DIR):
 	mkdir -p $@
 
 clean:

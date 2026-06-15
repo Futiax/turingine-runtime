@@ -1,0 +1,1863 @@
+
+<!-- saved from url=(0083)https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Diff-and-integrate -->
+<html lang="en" data-darkreader-mode="dynamic" data-darkreader-scheme="dark" data-darkreader-proxy-injected="true" class=" idc0_343 ccgzwgrms"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><style class="darkreader darkreader--fallback" media="screen"></style><style class="darkreader darkreader--user-agent" media="screen">@layer {
+html {
+    background-color: var(--darkreader-background-ffffff, #1c1e1f) !important;
+}
+html {
+    color-scheme: dark !important;
+}
+iframe {
+    color-scheme: dark !important;
+}
+html, body {
+    background-color: var(--darkreader-background-ffffff, #1c1e1f);
+}
+html, body {
+    border-color: var(--darkreader-border-4c4c4c, #6e675b);
+    color: var(--darkreader-text-000000, #d8d6d3);
+}
+a {
+    color: var(--darkreader-text-0040ff, #3489ed);
+}
+table {
+    border-color: var(--darkreader-border-808080, #52595b);
+}
+mark {
+    color: var(--darkreader-text-000000, #d8d6d3);
+}
+::placeholder {
+    color: var(--darkreader-text-a9a9a9, #a7a198);
+}
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    background-color: var(--darkreader-background-faffbd, #404406) !important;
+    color: var(--darkreader-text-000000, #d8d6d3) !important;
+}
+::selection {
+    background-color: var(--darkreader-background-0060d4, #064ca0) !important;
+    color: var(--darkreader-text-ffffff, #d8d6d3) !important;
+}
+::-moz-selection {
+    background-color: var(--darkreader-background-0060d4, #064ca0) !important;
+    color: var(--darkreader-text-ffffff, #d8d6d3) !important;
+}
+}</style><style class="darkreader darkreader--text" media="screen">*:not(pre, pre *, code, [aria-hidden="true"], [class*="fa-"], .fa, .fab, .fad, .fal, .far, .fas, .fass, .fasr, .fat, .icofont, [style*="font-"], [class*="icon"], [class*="Icon"], [class*="symbol"], [class*="Symbol"], .glyphicon, [class*="material-symbol"], [class*="material-icon"], mu, [class*="mu-"], .typcn, [class*="vjs-"]) {
+  font-family: Segoe UI Historic !important;
+}</style><style class="darkreader darkreader--invert" media="screen">.jfk-bubble.gtx-bubble, .captcheck_answer_label > input + img, span#closed_text > img[src^="https://www.gstatic.com/images/branding/googlelogo"], span[data-href^="https://www.hcaptcha.com/"] > #icon, img.Wirisformula, a[data-testid="headerMediumLogo"]>svg, .d2l-navigation-link-image-container, .d2l-iframe-loading-container, div.mc-ip-hide[style*="background: rgb(255, 255, 255) !important"], [style*="color: rgb(0, 0, 1) !important;"] {
+    filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(85%) !important;
+}</style><style class="darkreader darkreader--inline" media="screen">[data-darkreader-inline-bgcolor] {
+  background-color: var(--darkreader-inline-bgcolor) !important;
+}
+[data-darkreader-inline-bgimage] {
+  background-image: var(--darkreader-inline-bgimage) !important;
+}
+[data-darkreader-inline-border] {
+  border-color: var(--darkreader-inline-border) !important;
+}
+[data-darkreader-inline-border-bottom] {
+  border-bottom-color: var(--darkreader-inline-border-bottom) !important;
+}
+[data-darkreader-inline-border-left] {
+  border-left-color: var(--darkreader-inline-border-left) !important;
+}
+[data-darkreader-inline-border-right] {
+  border-right-color: var(--darkreader-inline-border-right) !important;
+}
+[data-darkreader-inline-border-top] {
+  border-top-color: var(--darkreader-inline-border-top) !important;
+}
+[data-darkreader-inline-boxshadow] {
+  box-shadow: var(--darkreader-inline-boxshadow) !important;
+}
+[data-darkreader-inline-color] {
+  color: var(--darkreader-inline-color) !important;
+}
+[data-darkreader-inline-fill] {
+  fill: var(--darkreader-inline-fill) !important;
+}
+[data-darkreader-inline-stroke] {
+  stroke: var(--darkreader-inline-stroke) !important;
+}
+[data-darkreader-inline-outline] {
+  outline-color: var(--darkreader-inline-outline) !important;
+}
+[data-darkreader-inline-stopcolor] {
+  stop-color: var(--darkreader-inline-stopcolor) !important;
+}
+[data-darkreader-inline-bg] {
+  background: var(--darkreader-inline-bg) !important;
+}
+[data-darkreader-inline-border-short] {
+  border: var(--darkreader-inline-border-short) !important;
+}
+[data-darkreader-inline-border-bottom-short] {
+  border-bottom: var(--darkreader-inline-border-bottom-short) !important;
+}
+[data-darkreader-inline-border-left-short] {
+  border-left: var(--darkreader-inline-border-left-short) !important;
+}
+[data-darkreader-inline-border-right-short] {
+  border-right: var(--darkreader-inline-border-right-short) !important;
+}
+[data-darkreader-inline-border-top-short] {
+  border-top: var(--darkreader-inline-border-top-short) !important;
+}
+[data-darkreader-inline-invert] {
+    filter: invert(100%) hue-rotate(180deg);
+}</style><style class="darkreader darkreader--variables" media="screen">:root {
+   --darkreader-neutral-background: var(--darkreader-background-ffffff, #1c1e1f);
+   --darkreader-neutral-text: var(--darkreader-text-000000, #d8d6d3);
+   --darkreader-selection-background: var(--darkreader-background-0060d4, #064ca0);
+   --darkreader-selection-text: var(--darkreader-text-ffffff, #d8d6d3);
+}</style><style class="darkreader darkreader--root-vars" media="screen"></style>
+<title>Giac API</title>
+
+<meta name="description" content="Giac API">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="top" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Top">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style><style class="darkreader darkreader--sync" media="screen"></style>
+<meta name="darkreader" content="5b59b9e557d9454cad0e24a2c514476c"><style class="darkreader darkreader--override" media="screen">.vimvixen-hint {
+    background-color: var(--darkreader-background-ffd76e, #644a06) !important;
+    border-color: var(--darkreader-background-c59d00, #957806) !important;
+    color: var(--darkreader-text-302505, #c8c6c1) !important;
+}
+#vimvixen-console-frame {
+    color-scheme: light !important;
+}
+::placeholder {
+    opacity: 0.5 !important;
+}
+#edge-translate-panel-body,
+.MuiTypography-body1,
+.nfe-quote-text {
+    color: var(--darkreader-neutral-text) !important;
+}
+gr-main-header {
+    background-color: var(--darkreader-background-add8e6, #1f4856) !important;
+}
+.tou-z65h9k,
+.tou-mignzq,
+.tou-1b6i2ox,
+.tou-lnqlqk {
+    background-color: var(--darkreader-neutral-background) !important;
+}
+.tou-75mvi {
+    background-color: var(--darkreader-background-cfecf5, #143b46) !important;
+}
+.tou-ta9e87,
+.tou-1w3fhi0,
+.tou-1b8t2us,
+.tou-py7lfi,
+.tou-1lpmd9d,
+.tou-1frrtv8,
+.tou-17ezmgn {
+    background-color: var(--darkreader-background-f5f5f5, #212324) !important;
+}
+.tou-uknfeu {
+    background-color: var(--darkreader-background-faedda, #432e0e) !important;
+}
+.tou-6i3zyv {
+    background-color: var(--darkreader-background-85c3d8, #275a6b) !important;
+}
+div.mermaid-viewer-control-panel .btn {
+    background-color: var(--darkreader-neutral-background);
+    fill: var(--darkreader-neutral-text);
+}
+svg g rect.er {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.er.entityBox {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.er.attributeBoxOdd {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.er.attributeBoxEven {
+    fill: var(--darkreader-selection-background);
+    fill-opacity: 0.8 !important;
+}
+svg rect.er.relationshipLabelBox {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g g.nodes rect,
+svg g g.nodes polygon {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.task {
+    fill: var(--darkreader-selection-background) !important;
+}
+svg line.messageLine0,
+svg line.messageLine1 {
+    stroke: var(--darkreader-neutral-text) !important;
+}
+div.mermaid .actor {
+    fill: var(--darkreader-neutral-background) !important;
+}
+mitid-authenticators-code-app > .code-app-container {
+    background-color: white !important;
+    padding-top: 1rem;
+}
+iframe#unpaywall[src$="unpaywall.html"] {
+    color-scheme: light !important;
+}
+select {
+    --darkreader-bg--form-control-background-color: rgba(22, 22, 22, 0) !important;
+}
+body#tumblr {
+    --darkreader-bg--secondary-accent: 31, 32, 34 !important;
+    --darkreader-bg--white: 23, 23, 23 !important;
+    --darkreader-text--black: 228, 224, 218 !important;
+}
+:host {
+    --d2l-border-color: var(--darkreader-bg--d2l-color-gypsum) !important;
+    --d2l-button-icon-background-color-hover: var(--darkreader-bg--d2l-color-gypsum) !important;
+    --d2l-color-ferrite: var(--darkreader-neutral-text) !important;
+    --d2l-color-sylvite: var(--darkreader-bg--d2l-color-sylvite) !important;
+    --d2l-dropdown-background-color: var(--darkreader-neutral-background) !important;
+    --d2l-dropdown-border-color: var(--darkreader-border--d2l-color-mica) !important;
+    --d2l-input-backgroud-color: var(--darkreader-neutral-background) !important;
+    --d2l-menu-border-color: var(--darkreader-bg--d2l-color-gypsum) !important;
+    --d2l-tooltip-background-color: var(--darkreader-neutral-background) !important;
+    --d2l-tooltip-border-color: var(--darkreader-bg--d2l-color-gypsum) !important;
+}
+:host([_floating]) .d2l-floating-buttons-container {
+    background-color: var(--darkreader-neutral-background) !important;
+    border-top-color: var(--darkreader-border--d2l-color-mica) !important;
+    opacity: 0.88 !important;
+}
+d2l-card {
+    background: var(--darkreader-neutral-background) !important;
+    border-color: var(--darkreader-border--d2l-color-gypsum) !important;
+}
+d2l-dropdown-content > div,
+d2l-menu-item {
+    background-color: var(--darkreader-neutral-background) !important;
+    border-radius: 10px !important;
+}
+d2l-empty-state-simple {
+    border-color: var(--darkreader-bg--d2l-color-gypsum) !important;
+}
+.d2l-button-filter > ul > li > a.vui-button {
+    border-color: var(--darkreader-border--d2l-color-mica) !important;
+}
+.d2l-label-text:has(.d2l-button-subtle-content):hover,
+.d2l-label-text:has(.d2l-button-subtle-content):focus,
+.d2l-label-text:has(.d2l-button-subtle-content):active {
+    background-color: var(--darkreader-bg--d2l-color-gypsum) !important;
+}
+.d2l-navigation-centerer {
+    color: inherit !important;
+}
+.d2l-tabs-layout {
+    border-color: var(--darkreader-border--d2l-color-gypsum) !important;
+}
+.d2l-input,
+.d2l-calendar-date,
+.d2l-htmleditor-container {
+    background-color: var(--darkreader-neutral-background) !important;
+}
+.d2l-collapsible-panel {
+    border: 1px solid var(--darkreader-border--d2l-color-mica) !important;
+    border-radius: 0.4rem !important;
+}
+.d2l-collapsible-panel-divider {
+    border-bottom: 1px solid var(--darkreader-border--d2l-color-mica) !important;
+}
+.d2l-w2d-flex {
+    border-bottom: 2px solid var(--darkreader-border--d2l-color-mica) !important;
+}
+.d2l-collapsible-panel scrolled,
+.d2l-collapsible-panel-header,
+.d2l-w2d-collection-fixed {
+    background-color: var(--darkreader-neutral-background) !important;
+}
+.d2l-loading-spinner-bg {
+    fill: var(--darkreader-bg--d2l-color-gypsum) !important;
+}
+.d2l-loading-spinner-bg-stroke {
+    stroke: var(--darkreader-border--d2l-color-mica) !important;
+}
+.d2l-loading-spinner-wrapper svg path,
+.d2l-loading-spinner-wrapper svg circle {
+    fill: var(--darkreader-neutral-background) !important;
+}
+.d2l-twopanelselector-side.d2l-twopanelselector-side-sep {
+    background: var(--darkreader-bg--d2l-color-mica) !important;
+}
+.d2l-le-TreeAccordionItem-anchor::before {
+    background: var(--darkreader-bg--d2l-color-corundum) !important;
+}
+table[class|="moz-header"] {
+    background: none;
+}
+*[style*="color: rgba(0,0,0,"],
+*[style*="color: rgba(0, 0, 0,"],
+*[style*="color:#000"],
+*[style*="color:black"],
+*[style*="color:#282828"],
+*[style*="color:#444"] {
+    color: var(--darkreader-neutral-text) !important;
+}
+*[style*="background:#fff"],
+*[style*="background-color:#fff"] {
+    background: var(--darkreader-neutral-background) !important;
+}
+*[bgcolor="#F5F5F5"],
+*[style*="background-color: #F5F5F5"] {
+    background: var(--darkreader-background-f5f5f5, #212324) !important;
+}
+body[style*="background: rgb(255, 255, 255) !important"] *:not(a),
+.body[style*="background-color: rgb(254, 254, 254) !important"] *:not(a) {
+    background-color: var(--darkreader-neutral-background) !important;
+}
+div[style*="www.gstatic.com/android/"] {
+    background: none !important;
+}
+*[style*="background:#f9f9f9"] {
+    background: var(--darkreader-background-f9f9f9, #1f2122) !important;
+}
+body.mediawiki.skin-vector #mw-page-base {
+    background-image: none !important;
+}
+embed[type="application/pdf"][src="about:blank"] { filter: invert(100%) contrast(90%); }</style><link href="./Giac API_files/css2" rel="stylesheet"></head>
+<body>
+<h1 class="settitle">Giac API</h1>
+<div class="node">
+<a name="Top"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Installation">Installation</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#dir">(dir)</a>
+
+</div>
+
+<!-- node-name, next,previous, up -->
+   <p>Giac is a C++ library that has types for symbolic algebraic manipulations. 
+Xcas is a GUI linked with Giac that provides the functionnalities
+of a general purpose computer algebra system. 
+Giac's name derive from <a href="http://www.ginac.de/">http://www.ginac.de</a>, another C++
+library for symbolic algebraic computations.
+
+</p><ul class="menu">
+<li><a accesskey="1" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Installation">Installation</a>:      How to install giac/icas/xcas
+</li><li><a accesskey="2" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Xcas">Xcas</a>:              Describes the xcas user-interface to giac
+</li><li><a accesskey="3" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Giac">Giac</a>:              How to program in C++ using giac. 
+</li><li><a accesskey="4" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Examples">Examples</a>:          Some examples of xcas script and C++ program using giac
+</li><li><a accesskey="5" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Concept-Index">Concept Index</a>:     Index. 
+</li></ul>
+
+<div class="node">
+<a name="Installation"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Xcas">Xcas</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Top">Top</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Top">Top</a>
+
+</div>
+
+<h2 class="chapter">1 Installing Giac/Xcas</h2>
+
+<ul class="menu">
+<li><a accesskey="1" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Binaries">Binaries</a>:          Installing xcas binaries only
+</li><li><a accesskey="2" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Requirements">Requirements</a>:      Compiling xcas requires libraries and program
+</li><li><a accesskey="3" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Options">Options</a>:           Optionnal libraries that enhance giac behaviour
+</li><li><a accesskey="4" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Configure">Configure</a>:         Options for the configure shell script
+</li><li><a accesskey="5" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Compiling">Compiling</a>:         Compilation of giac
+</li><li><a accesskey="6" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Troubles">Troubles</a>:          Some tips if you are in trouble
+</li></ul>
+
+<div class="node">
+<a name="Binaries"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Requirements">Requirements</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Installation">Installation</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Installation">Installation</a>
+
+</div>
+
+<h3 class="section">1.1 Installing binaries</h3>
+
+<p>If you want to use <code>xcas/giac</code> like another CAS and your OS is
+Intel x86 GNU/Linux or Intel StrongARM GNU/Linux or Windows 9x or Mac OS
+X.4(+), then
+you don't need to worry about compilation. Instead you can install
+precompiled binaries:
+     </p><ul>
+<li>x86 GNU/Linux as a normal user:
+<a href="ftp://ftp-fourier.univ-grenoble-alpes.fr/xcas/xcas_user.tgz">ftp://ftp-fourier.univ-grenoble-alpes.fr/xcas/xcas_user.tgz</a>
+
+     <p>Unpack the archive with
+<samp><span class="command">tar xvfz xcas_user.tgz</span></samp>
+
+     </p><p>then
+<samp><span class="command">cd xcas</span></samp>
+
+     </p><p>and
+<samp><span class="command">./xcas</span></samp>
+</p></li><li>x86 GNU/Linux if you have root access:
+<a href="ftp://ftp-fourier.univ-grenoble-alpes.fr/xcas/xcas_root.tgz">ftp://ftp-fourier.univ-grenoble-alpes.fr/xcas/xcas_root.tgz</a>
+Unpack the archive from the <code>/</code> directory
+</li><li>ARM GNU/Linux:
+<a href="ftp://ftp-fourier.univ-grenoble-alpes.fr/xcas/xcas_ipaq.tgz">ftp://ftp-fourier.univ-grenoble-alpes.fr/xcas/xcas_ipaq.tgz</a>
+</li><li>Windows 9x:
+<a href="ftp://ftp-fourier.univ-grenoble-alpes.fr/xcas/xcasinst.exe">ftp://ftp-fourier.univ-grenoble-alpes.fr/xcas/xcasinst.exe</a>. 
+Run <code>xcas</code> from the Start menu. 
+</li><li>Mac OS X:
+<a href="ftp://ftp-fourier.univ-grenoble-alpes.fr/xcas/xcas_osx4.dmg.gz">ftp://ftp-fourier.univ-grenoble-alpes.fr/xcas/xcas_osx4.dmg.gz</a>. 
+Run <code>xcas</code> from the Applications. 
+</li></ul>
+
+<div class="node">
+<a name="Requirements"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Options">Options</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Binaries">Binaries</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Installation">Installation</a>
+
+</div>
+
+<h3 class="section">1.2 Requirements</h3>
+
+<p>Get Giac source at <a href="ftp://ftp-fourier.univ-grenoble-alpes.fr/xcas/giac_stable.tgz">ftp://ftp-fourier.univ-grenoble-alpes.fr/xcas/giac_stable.tgz</a>
+or <a href="http://perso.wanadoo.fr/bernard.parisse/">http://perso.wanadoo.fr/bernard.parisse/</a>. 
+Check that your C++ compiler understand the C++ ANSI 3 norm. For
+example <code>gcc</code> version 2.95 or later will work. If the GMP GNU Math
+Precision Library is not installed on your system, install it:
+<a href="http://www.gnu.org/directory/gnump.html">http://www.gnu.org/directory/gnump.html</a>. If you are using GNU/Linux,
+the GMP library is most probably installed but the headers files
+might not, check for a package named something like <code>gmp-devel</code>.
+
+</p><div class="node">
+<a name="Options"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Configure">Configure</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Requirements">Requirements</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Installation">Installation</a>
+
+</div>
+
+<h3 class="section">1.3 Options</h3>
+
+     <ol type="1" start="1">
+<li>If you want numerical functions you should install the Gnu Scientific
+Library available at <a href="http://sources.redhat.com/gsl">http://sources.redhat.com/gsl</a>
+</li><li>If you want to use NTL for some polynomial operations (currently
+factorization), get version &gt;= 5.2 at <a href="http://www.shoup.net/">http://www.shoup.net</a>. Then
+check that you configured with namespace enabled (this is not the
+default) and with GMP enabled (not the default, but this is not mandatory)
+If you are not sure of your install go in the NTL directory and type
+     <pre class="smallexample">           make clean
+           ./configure NTL_GMP_LIP=on NTL_STD_CXX=on
+           make
+           make install
+</pre>
+     </li><li>If you want advanced arithmetic functions, get PARI at
+<a href="http://www.parigp-home.de/">http://www.parigp-home.de</a>. 
+If you plan to use an old version of PARI WITHOUT NTL then you MUST MAKE THE
+FOLLOWING PATCHES in the PARI source directory:
+          <ul>
+<li>File <code>src/basemath/polarit2.c</code>: remove the word
+<code>static</code> from the declaration:
+          <pre class="smallexample">                 static GEN
+                 combine_factors(...)
+</pre>
+          </li><li>File <code>src/headers/paridecl.h</code>: Add the line
+
+          <p><code>GEN     combine_factors(GEN a, GEN famod, GEN p, long klim, long hint);</code>
+
+          </p><p>in the <code>* polarit2.c</code> section. 
+</p></li><li>Recompile (<samp><span class="command">make all</span></samp>) and reinstall PARI (<code>make install</code>)
+and check that <code>libpari.a</code> has been updated or copy it explicitely
+from the <code>O&lt;your_os&gt;</code> directory. 
+</li><li>Replace in <code>/usr/local/include/pari/pariinl.h</code> <code>labs</code>
+by <code>std::abs</code> otherwise you might get compiler errors. 
+</li></ul>
+     Check in the giac src directory, file pari.cc that the memory allocated
+to the PARI stack suit your needs (default is 10M of RAM) or modify:
+<code>  long pari_mem_size=10000000;</code>
+
+     </li><li>If you want GUI support, check that you have FLTK 1.1
+installed (available at <a href="http://www.fltk.org/">http://www.fltk.org</a>).
+
+     </li><li>TeXmacs provides an interface for giac. You can get it
+at <a href="http://www.texmacs.org/">http://www.texmacs.org</a>. 
+After installing giac, run texmacs and use Insert-&gt;Session-&gt;giac.
+
+     </li></ol>
+
+<div class="node">
+<a name="Configure"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Compiling">Compiling</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Options">Options</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Installation">Installation</a>
+
+</div>
+
+<h3 class="section">1.4 Configure options</h3>
+
+<p>The <code>./configure </code> shell-script recognizes the following options:
+     </p><ol type="1" start="1">
+<li>–enable-debug
+  Allow vecteurs printing and add some debugging code
+</li><li>–enable-fltk
+  GUI support
+</li><li>–enable-gsl
+  Use the Gnu Scientific Library for floating point (e.g. special functions..) 
+</li><li>–enable-sscl
+  Allow inclusion of code for semi-classical algorithms (Moyal product, ...) 
+  Not available yet
+</li><li>–enable-ntl
+  Allow inclusion of NTL code
+</li><li>–enable-pari
+  Allow inclusion of PARI code
+        </li></ol>
+
+   <p>These options can be turned off using <code>--disable-option-name</code> instead of
+<code>--enable-option-name</code>. By default <code>configure</code> will use these
+options if the libraries are available on your system.
+
+   </p><p>For full speed binaries, before calling <code>configure</code> do (with bash
+as shell)
+
+   </p><p><samp><span class="command">$ export CXXFLAGS="-O3 -fexpensive-optimizations -malign-loops=2 -malign-jumps=2 -malign-functions=2"</span></samp>
+
+   </p><p>or (with tcsh as shell)
+
+   </p><p><samp><span class="command">$ setenv CXXFLAGS "-O3 -fexpensive-optimizations -malign-loops=2 -malign-jumps=2 -malign-functions=2"</span></samp>
+
+</p><div class="node">
+<a name="Compiling"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Troubles">Troubles</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Configure">Configure</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Installation">Installation</a>
+
+</div>
+
+<h3 class="section">1.5 Compiling</h3>
+
+<p>Like with any autoconfiguring GNU software, you can type :
+
+   </p><p><samp><span class="command"> ./configure </span></samp>
+
+   </p><p>[add options as needed: try <samp><span class="command">./configure -help</span></samp> for option info]
+
+   </p><p><samp><span class="command"> make </span></samp>
+
+   </p><p><samp><span class="command"> make check </span></samp>
+
+   </p><p>[become root if necessary]
+
+   </p><p><samp><span class="command"> make install </span></samp>
+
+   </p><p>Tips:
+     </p><ul>
+<li>If you don't want optimizations, set the environment variable
+<samp><span class="env">CXXFLAGS</span></samp> to <code>-g</code> before calling configure, with tcsh
+<samp><span class="command"> setenv CXXFLAGS -g</span></samp>, with bash <samp><span class="command">export CXXFLAGS=-g</span></samp>.
+
+     </li><li>If you want the commandline icas only run
+
+     <p><samp><span class="command"> ./configure --disable-gui</span></samp>
+
+     </p><p><samp><span class="command"> make </span></samp>
+
+     </p></li><li>If you want to build xcas for the ARM processor with the Linux familiar
+distribution (e.g. for an iPaq <a href="http://www.handhelds.org/">http://www.handhelds.org</a>)
+assuming you have the skiff toolchain installed and FLTK installed. 
+Check that <code>config.h</code> defines HAVE_LIBFLTK and does not define
+HAVE_LIBGSL and HAVE_LIBGSLCBLAS unless you have these libraries too, then
+
+     <p><samp><span class="command"> make -f Makefile.ipaq</span></samp>
+
+     </p><p>Note that I never succeded to build with optimization for the iPaq.
+
+     </p></li><li>Windows
+
+     <p>You can compile the library version of giac like under Unix. 
+Or assuming you have the cygwin tools, gmp and FLTK installed (see
+<a href="http://sources.redhat.com/cygwin">http://sources.redhat.com/cygwin</a> for cygwin, run cygwin,
+go in the <code>src</code> directory and run
+
+     </p><p><samp><span class="command"> make -f Makefile.win</span></samp>
+
+     </p><p>After that, you may run <code>xcas.exe</code> standalone, provided
+<code>/usr/bin/cygwin1.dll</code> has been copied in the path (e.g. in the same
+directory as <code>xcas.exe</code>)
+</p></li></ul>
+
+<div class="node">
+<a name="Troubles"></a>
+<p></p><hr>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Compiling">Compiling</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Installation">Installation</a>
+
+</div>
+
+<h3 class="section">1.6 Troubles</h3>
+
+     <ul>
+<li>If you test giac after compilation with <code>make check</code>,
+please note that the answer assume PARI and NTL are enabled. 
+Otherwise you will get some errors because factoring will not
+return the factors in the same order. 
+</li><li>Optimization requires much memory for compilation. If you are low
+in memory edit <code>src/Makefile</code> and if necessary replace the line :
+
+     <p><code>CXXFLAGS = -g -O2</code>
+by :
+
+     </p><p><code>CXXFLAGS = -g</code>
+
+     </p></li><li>If you get an error like
+
+     <p><samp><span class="command">autoheader: Symbol 'CONSTANT_DEBUG_SUPPORT' is not covered by ...</span></samp>
+
+     </p><p>run
+
+     </p><p><samp><span class="command">autoheader --localdir=.</span></samp>
+</p></li><li>If you get error when compiling <code>modpoly.cc</code>, it's most certainly
+because you compiled NTL without namespaces. Recompile it (see section)
+</li><li>If you get a linker error about combine_factors not found in
+<code>modfactor.o</code> it's because you did not modify PARI correctly or
+forgot to re-install the PARI libraries (see section)
+</li><li>Cygwin compilation of Giac with PARI 2.1.1 requires you to make
+some hand work. I could not get the dynamic version of PARI library compiling. 
+Therefore I had to do the install by hand
+     <pre class="smallexample">          cp libpari.a /usr/local/lib
+          mkdir /usr/local/include/pari
+          cp src/headers/*.h /usr/local/include/pari
+          cp Ocygwin/*.h /usr/local/include/pari
+</pre>
+     <p>Then I got an error compiling <code>pari.cc</code> that dispeared by commenting
+the offending line in the header <code>/usr/local/include/pari/paricom.h</code>
+After that all went OK. 
+</p></li></ul>
+
+<div class="node">
+<a name="Xcas"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Giac">Giac</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Installation">Installation</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Top">Top</a>
+
+</div>
+
+<h2 class="chapter">2 Using xcas, an user-interface to giac</h2>
+
+<p><code>xcas</code> is an user-interface to giac that is similar to a calculator. 
+A readline interface named <code>cas</code> is also available.
+
+</p><ul class="menu">
+<li><a accesskey="1" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Interface">Interface</a>
+</li><li><a accesskey="2" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#CAS">CAS</a>
+</li><li><a accesskey="3" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Geometry">Geometry</a>
+</li><li><a accesskey="4" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Spreadsheet">Spreadsheet</a>
+</li><li><a accesskey="5" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Scripting">Scripting</a>
+</li><li><a accesskey="6" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Environment">Environment</a>
+</li></ul>
+
+<div class="node">
+<a name="Interface"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#CAS">CAS</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Xcas">Xcas</a>
+
+</div>
+
+<h3 class="section">2.1 The interface</h3>
+
+<p>You can use but you don't need to have a keyboard to use xcas, it
+is designed to be used on a PDA as well. Use the green shift button to get the
+button-keyboard.
+
+   </p><p>The window is composed from left and up to right and down of:
+     </p><ol type="1" start="1">
+<li>The main menu-bar: at the left: session management, configuration
+and help, at the right the commands by theme
+</li><li>The session menu: file and edit operations. In the Edit menu,
+the Add item lets you add levels of different kinds: commandlines,
+comments, 2-d and 3-d geometry and graphs, spreadsheet, program editor
+</li><li>The session, with a blank commandline at startup
+</li><li>The buttons: help (?), switch for scientific keyboard (kbd),
+status button (in red, click here to change the CAS configuration)
+        </li></ol>
+
+   <p>The on-line help gives a short description of all the CAS commands
+with examples that can be pasted to the commandline. A more complete
+description is available by clicking on Details. Command completion
+is enabled in commandlines with the Tab key.
+
+   </p><p>Printing may be done natively to Postscript or with a working
+<code>LaTeX</code> installation (with <code>pstricks</code> for 2-d graphs).
+
+</p><div class="node">
+<a name="CAS"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Geometry">Geometry</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Interface">Interface</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Xcas">Xcas</a>
+
+</div>
+
+<h3 class="section">2.2 Computer algebra system commands</h3>
+
+<p>A list of commands of the CAS system.
+
+</p><ul class="menu">
+<li><a accesskey="1" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Math-menu">Math menu</a>
+</li><li><a accesskey="2" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Arithmetic">Arithmetic</a>
+</li><li><a accesskey="3" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Cas-menu">Cas menu</a>
+</li><li><a accesskey="4" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Linear-algebra">Linear algebra</a>
+</li></ul>
+
+<div class="node">
+<a name="Math-menu"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Arithmetic">Arithmetic</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#CAS">CAS</a>
+
+</div>
+
+<h4 class="subsection">2.2.1 Basic mathematic commands</h4>
+
+<div class="node">
+<a name="Arithmetic"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Cas-menu">Cas menu</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Math-menu">Math menu</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#CAS">CAS</a>
+
+</div>
+
+<h4 class="subsection">2.2.2 Arithmetic of integers and polynomials</h4>
+
+<p>The <code>gcd</code> and <code>lcm</code> commands apply to both argument types : they
+return the greatest common divisor or the least common multiplicator. 
+Other arithmetic commands must begin with an <code>i</code> if you want
+to use them with integers, otherwise the arguments will be considered
+as constant polynomials.
+
+</p><ul class="menu">
+<li><a accesskey="1" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Integer-arithmetic">Integer arithmetic</a>
+</li><li><a accesskey="2" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Polynomial-arithmetic">Polynomial arithmetic</a>
+</li></ul>
+
+<div class="node">
+<a name="Integer-arithmetic"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Polynomial-arithmetic">Polynomial arithmetic</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Arithmetic">Arithmetic</a>
+
+</div>
+
+<h5 class="subsubsection">2.2.2.1 Integer arithmetic functions</h5>
+
+<ul class="menu">
+<li><a accesskey="1" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Division">Division</a>:       Euclidean division
+</li><li><a accesskey="2" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Gcd">Gcd</a>:            Gcd, lcm, extended gcd, chinese remainder
+</li><li><a accesskey="3" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Primality">Primality</a>:      Primality test, factorization, Euler characteristic
+</li><li><a accesskey="4" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Other-integer">Other integer</a>:  Jacobi, Legendre symbol... 
+</li></ul>
+
+<div class="node">
+<a name="Division"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Gcd">Gcd</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Integer-arithmetic">Integer arithmetic</a>
+
+</div>
+
+<h5 class="subsubsection">2.2.2.2 Euclidean integer division</h5>
+
+<p>Given two integers <code>a</code> and <code>b</code>, the euclidean integer division
+is defined by the equality :
+</p><pre class="example">     a=b*q+r
+</pre>
+   <p>where usually <code>r</code> is taken between 0 and <code>b-1</code>, or
+in the symmetric representation, between <code>-b/2</code> and <code>b/2</code>. 
+The functions <code>iquo(a,b)</code> and <code>irem(a,b)</code> return respectively
+<code>q</code> and <code>r</code>, or <code>iquorem(a,b)</code> return both in a vector. 
+The <code>smod(a,b)</code> function will return <code>r</code> using the symmetric
+remainder convention.
+
+</p><div class="node">
+<a name="Gcd"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Primality">Primality</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Division">Division</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Integer-arithmetic">Integer arithmetic</a>
+
+</div>
+
+<h5 class="subsubsection">2.2.2.3 Integer gcd</h5>
+
+<p>The <code>gcd(a,b)</code> function returns the greatest common divisor
+<code>d</code> of two integers <code>a</code> and <code>b</code>. If you need two integers
+<code>u</code> and <code>v</code> such that:
+</p><pre class="example">     a*u+b*v=d
+</pre>
+   <p>you should call <code>egcd(a,b)</code> instead, it will return <code>[u,v,d]</code>.
+
+   </p><p>The <code>ichinrem([a,n],[b,m])</code> call where <code>n</code> and <code>m</code>
+are prime together will return a vector <code>[c,n*m]</code> such that
+<code>c=a (mod n)</code> and <code>c=b (mod m)</code>.
+
+</p><div class="node">
+<a name="Primality"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Other-integer">Other integer</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Gcd">Gcd</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Integer-arithmetic">Integer arithmetic</a>
+
+</div>
+
+<h5 class="subsubsection">2.2.2.4 Primality and factorization</h5>
+
+<p>The <code>is_prime(a)</code> function will return 0 if <code>a</code> is not prime. 
+It will return 2 if <code>a</code> is known to be prime, and 1 if <code>a</code>
+is a (strong) pseudo-prime. If you have compiled <code>xcas</code> with PARI
+support, you will get a prime certificate instead (see PARI documentation for
+more information).
+
+   </p><p>The <code>nextprime(a)</code> and <code>prevprime(a)</code> will return the next
+or previous (pseudo-)prime, given an integer <code>a</code>.
+
+   </p><p>The <code>ifactor(a)</code> function returns a factorization of <code>a</code>. 
+It is a good idea to compile with PARI support if you plan to factor
+relatively large integers (with prime factors having more than 20 digits).
+
+</p><div class="node">
+<a name="Other-integer"></a>
+<p></p><hr>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Primality">Primality</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Integer-arithmetic">Integer arithmetic</a>
+
+</div>
+
+<h5 class="subsubsection">2.2.2.5 Other integer functions (Legendre, Jacobi, ...)</h5>
+
+<p>Additional integer functions provided by <code>xcas</code> are
+     </p><ul>
+<li><code>jacobi(a,b)</code>
+and <code>legendre(a,b)</code>, see the GMP documentation for more details. 
+</li><li><code>pa2b2(p)</code> return <code>[a,b]</code> so that <code>p=a*a+b*b</code>
+if <code>p=1 (mod 4)</code> is prime. 
+</li></ul>
+
+<div class="node">
+<a name="Polynomial-arithmetic"></a>
+<p></p><hr>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Integer-arithmetic">Integer arithmetic</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Arithmetic">Arithmetic</a>
+
+</div>
+
+<h5 class="subsubsection">2.2.2.6 Polynomial arithmetic functions</h5>
+
+<p>Polynomials have two representations: symbolic representation or
+by a vector of coefficients. In the symbolic representation you might
+add the variable name as an additionnal parameter to the functions
+you call, otherwise the default variable is used. For the vector
+representation, it is recommended to use the right delimiter <code>poly1[</code>
+instead of <code>[</code> so that usual operations (addition, ...) behave
+correctly (i.e. not like vectors or matrices).
+     </p><ol type="1" start="1">
+<li><code>quo(a,b)</code> <code>rem(a,b)</code> and <code>quorem(a,b)</code>
+return respectively <code>q</code>, <code>r</code> and <code>[q,r]</code> polynomials
+so that <code>a=b*q+r</code> and <code>degree(r)&lt;degree(b)</code>
+</li><li><code>gcd(a,b)</code> return the greatest common divisor of two
+polynomials
+</li><li><code>egcd(a,b)</code> is the extended euclidean GCD algorithm, like for
+integers it returns a list of 3 polynomials <code>u,v,d</code> such
+that <code>au+bv=d</code>. 
+</li><li><code>chinrem</code> return the chinese remainder for polynomials written
+as lists. The 2 arguments are two lists made of a polynomial modulo
+another polynomial (where the modulo polynomials must be prime together). 
+The answer is the polynomial modulo the product of the modulo polynomials
+that reduce to the original polynomials modulo the original modulo
+polynomials
+</li><li><code>cyclotomic</code> takes an integer n as argument and returns the
+n-th cyclotomic polynomial.
+        </li></ol>
+
+<div class="node">
+<a name="Cas-menu"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Linear-algebra">Linear algebra</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Arithmetic">Arithmetic</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#CAS">CAS</a>
+
+</div>
+
+<h4 class="subsection">2.2.3 Algebra, calculus, ...</h4>
+
+<ul class="menu">
+<li><a accesskey="1" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Rewriting">Rewriting</a>
+</li><li><a accesskey="2" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Diff-and-integrate">Diff and integrate</a>
+</li><li><a accesskey="3" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Limits-and-series">Limits and series</a>
+</li><li><a accesskey="4" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Solving-equations">Solving equations</a>
+</li><li><a accesskey="5" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Other-cas-functions">Other cas functions</a>
+</li></ul>
+
+<div class="node">
+<a name="Rewriting"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Diff-and-integrate">Diff and integrate</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Cas-menu">Cas menu</a>
+
+</div>
+
+<h5 class="subsubsection">2.2.3.1 Rewriting expressions</h5>
+
+<p>The <code>normal</code> command rewrites a rational fraction as a ratio of two
+coprime polynomials. If an expression is not rational, it is first
+rationalized by substitution of transcendental expressions (e.g. 
+<code>sin(x)</code> by a temporary identifier. Algebraic expressions
+(e.g. <code>sqrt(x)</code>) are normalized too.
+
+   </p><p>The <code>factor</code> command factorize polynomials. Like above a non
+polynomial expression is first rationalized. You can choose the main
+variable with respect to which the polynomial will be factorized by
+adding it as second argument of <code>factor</code>.
+
+   </p><p>The <code>texpand</code> function is called to expand transcendental
+expressions like <code>exp(x+y)=exp(x)*exp(y)</code> or similar rules
+for trigonometric functions. The <code>tlin</code> function does
+the reverse operation for trigonometric functions, as the <code>lin</code>
+function does it for exponentials.
+
+   </p><p>The <code>halftan</code> function rewrites trigonometric expressions
+in terms of the tangent of the half angle. The <code>hyp2exp</code>
+function rewrites hyperbolic functions in terms of exponentials.
+
+</p><div class="node">
+<a name="Diff-and-integrate"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Limits-and-series">Limits and series</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Rewriting">Rewriting</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Cas-menu">Cas menu</a>
+
+</div>
+
+<h5 class="subsubsection">2.2.3.2 Derivation, integration</h5>
+
+<p>The differentiation instruction is <code>diff(expression,variable)</code>. 
+The undefined antiderivative is obtained using
+<code>integrate(expression,variable)</code>. If you need defined integration
+between bounds <code>a</code> and <code>b</code>, choose
+<code>integrate(expression,variable,a,b)</code> for exact integration
+or <code>romberg(expression,variable,a,b)</code> for numeric integration.
+
+   </p><p>Example of defined integration are Fourier coefficients of periodic
+functions. They are provided using <code>fourier_an</code> and <code>fourier_bn</code>
+for trigonometric coefficients or using <code>fourier_cn</code> for
+complex exponentials coefficients.
+
+   </p><p>Some discrete antiderivatives may be obtained using the
+<code>sum(variable,expression)</code> call.
+
+</p><div class="node">
+<a name="Limits-and-series"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Solving-equations">Solving equations</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Diff-and-integrate">Diff and integrate</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Cas-menu">Cas menu</a>
+
+</div>
+
+<h5 class="subsubsection">2.2.3.3 Limits, series expansion.</h5>
+
+<p>For a limit the syntax is
+<code>limit(expression,variable,limitpoint[,direction])</code>. 
+For a series expansion
+<code>series(expression,variable,limitpoint,order[,direction])</code>. 
+<code>giac</code> implementation of <code>limit</code> and <code>series</code> is based
+on the mrv algorithm.
+
+</p><div class="node">
+<a name="Solving-equations"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Other-cas-functions">Other cas functions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Limits-and-series">Limits and series</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Cas-menu">Cas menu</a>
+
+</div>
+
+<h4 class="subsection">2.2.4 Solving equations</h4>
+
+<p>The <code>solve(expression,variable)</code> call is used to find exact
+solutions of (polynomial-)like equations. Use <code>newton</code> instead
+for numeric solutions (of a wider range of equations).
+
+</p><div class="node">
+<a name="Other-cas-functions"></a>
+<p></p><hr>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Solving-equations">Solving equations</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Cas-menu">Cas menu</a>
+
+</div>
+
+<div class="node">
+<a name="Linear-algebra"></a>
+<p></p><hr>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Cas-menu">Cas menu</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#CAS">CAS</a>
+
+</div>
+
+<h4 class="subsection">2.2.5 Linear algebra</h4>
+
+<p>Arithmetic operations on matrices and vectors are done using the usual
+operators. The scalar product of two vectors is obtained using the <code>*</code>
+operator.
+
+   </p><p>Gaussian elimination (Gauss-Bareiss) over a matrix is performed
+using <code>rref(m)</code>. The kernel of a linear application with matrix
+m is obtained with <code>ker(m)</code>. A system of linear equations (written
+symbolically in a vector) can be solved via
+<code>linsolve([equations],[variables])</code>.
+
+   </p><p>The determinant of a matrix may be obtained using two algorithms,
+either Gauss-Bareiss invoking <code>det(m)</code>, or by computing minors
+<code>det_minor(m)</code>. Actually, a last method is provided using the
+computation of the constant coefficient of the characteristic polynomial
+using Fadeev-Leverrier algorithm.
+
+   </p><p>The characteristic polynomial of a matrix may be computed by Fadeev-Leverrier
+algorithm calling <code>pcar(m)</code>. For matrices withe coefficients in
+a finite field, <code>pcar_hessenberg(m)</code> is a better choice (<code>O(n^3)</code>
+complexity where <code>n</code> is the size of the matrix).
+
+   </p><p>Eigenvalues and eigenvectors are computed using respectively <code>egvl(m)</code>
+and <code>egv(m)</code>. The Jordan normal form is obtained invoking
+<code>jordan(m)</code>.
+
+   </p><p>Quadratic forms (written symbolically) can be reduced to sum and differences
+of squares using <code>gauss(expression,[variables])</code>.
+
+   </p><p>There is some support for isometries: <code>mkisom</code> may be used to
+make an isometry from its proper elements as <code>isom(m)</code> return the
+proper elements of an isometry.
+
+</p><div class="node">
+<a name="Geometry"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Spreadsheet">Spreadsheet</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#CAS">CAS</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Xcas">Xcas</a>
+
+</div>
+
+<h3 class="section">2.3 Geometry</h3>
+
+<p>Add a figure (Edit menu of the session, Add item, then select geometry
+and graph 2-d or 3-d). 
+As other objects, you can create geometrical objects anatically using the
+commandlines at the left. You may also create points,
+segments, etc. with the mouse (or the stylus) or move a geometrical
+object depending on the mouse mode (Pointer, point, segment, circle, etc.)
+
+   </p><p>To configure or print a graph, use the menu at the right of the graph.
+
+</p><div class="node">
+<a name="Spreadsheet"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Scripting">Scripting</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Geometry">Geometry</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Xcas">Xcas</a>
+
+</div>
+
+<h3 class="section">2.4 Spreadsheet</h3>
+
+<p>Add a spreadsheet (Edit menu of the session, Add item, spreadsheet). 
+Cells may have a formal value, or eval to a geometric 2-d object
+that will be displayed in a dynamically linked 2-d graph.
+
+</p><div class="node">
+<a name="Scripting"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Environment">Environment</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Spreadsheet">Spreadsheet</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Xcas">Xcas</a>
+
+</div>
+
+<h3 class="section">2.5 The xcas scripting language</h3>
+
+<p>The xcas and icas program provide an interpreted language that is similar to
+popular other CAS programming language. This scripting language is
+available in 4 flavours: C-like syntax (default) or compatibility
+mode for simple Maple, Mupad or TI programs. We describe only the C-like
+syntax. Instructions must end with a semi-column <code>;</code>. Groups of
+instructions may be combined like in C with brackets.
+
+   </p><p>You can define a program in a commandline, but it is recommended
+to use a Program Editor (Edit-&gt;Add-&gt;Program menuitem of the session
+menubar) if it is larger than a few lines.
+
+</p><ul class="menu">
+<li><a accesskey="1" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Language-mode">Language mode</a>
+</li><li><a accesskey="2" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Data">Data</a>
+</li><li><a accesskey="3" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Loops-and-conditionnals">Loops and conditionnals</a>
+</li><li><a accesskey="4" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Functions">Functions</a>
+</li></ul>
+
+<div class="node">
+<a name="Language-mode"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Data">Data</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Scripting">Scripting</a>
+
+</div>
+
+<h3 class="section">2.6 Selecting the language mode</h3>
+
+<p>Click on the status button and select the programming style. 
+Alternatively, the command <code>maple_mode(0)</code> or <code>maple_mode(1)</code> or
+<code>maple_mode(2)</code> may be used to switch the language flavour
+respectively from C-like to Maple-like or Mupad-like mode. Note that this
+command takes effect only when the current parser session is finished
+which means when the next command is processed in interative mode or at
+the end of the current file in batch mode, hence you should not begin a script
+file with this command. In batch mode you can achieve the mode switch by
+setting the environment variable <code>GIAC_MAPLE_MODE</code>, for example with
+tcsh: <samp><span class="command">setenv GIAC_MAPLE_MODE 1</span></samp>
+or with bash <samp><span class="command">export GIAC_MAPLE_MODE=1</span></samp>
+will switch to the Maple-like language. Additionnally you can enter
+the <code>maple_mode(1)</code> command in the <code>.xcasrc</code> of your home directory
+to change the default behavior. Or inside <code>xcas</code> you can run
+the <code>Import</code> command of the <code>File</code> menu and select the flavour. 
+The <code>Export</code> command can be used to translate the current level
+of the history inside <code>xcas</code> to a file, or the <code>View as</code> command
+of the <code>Edit</code> menu to translate to the Help output window.
+
+</p><div class="node">
+<a name="Data"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Loops-and-conditionnals">Loops and conditionnals</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Language-mode">Language mode</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Scripting">Scripting</a>
+
+</div>
+
+<h3 class="section">2.7 Data</h3>
+
+<p>The language accept local and global variables, variables are not typed. 
+Global variables do not need to be declared, local variables must be declared
+at the beginning of a function by the keyword <code>local</code> followed by
+the names of the local variables separated by commas <code>,</code> with a final
+semi-columns <code>;</code>
+
+   </p><p>The affectation sign is <code>:=</code> like popular CAS and unlike C. 
+For large vectors, lists and matrices, you may also use <code>=&lt;</code> to make
+in-place modifications (in other words by reference), but be aware
+that all references of the object will be modified. 
+Other operations (e.g. {+ - * /}) and function calls are done like in C
+or like in an interactive session. 
+As in C, the equality test is <code>==</code>. The single equal sign <code>=</code>
+is used to return an equation (note that
+an equation will be transformed in a test
+in some situations where an equation could not be expected). 
+The other tests are <code>!=</code> for non equal, <code>&lt; &lt;= &gt; &gt;=</code> for
+real value comparisons. You can combine tests with <code>&amp;&amp;</code> or <code>and</code>,
+and <code>||</code> or <code>or</code>. The boolean negation is <code>!</code> or <code>not</code>.
+
+</p><div class="node">
+<a name="Loops-and-conditionnals"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Functions">Functions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Data">Data</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Scripting">Scripting</a>
+
+</div>
+
+   <p>The loop keywoard is like in C
+
+   </p><p><samp><span class="command">for (initialization;while_condition;increment){ loop_block }</span></samp>
+
+   </p><p>You can break a loop inside the loop block with <code>break;</code>. 
+You can skip immediately to the next iteration with <code>continue;</code>.
+
+   </p><p>The conditionnal keywoard is like in C
+
+   </p><p><samp><span class="command">if (condition) { bloc_if_true } [ else { bloc_if_false } ]</span></samp>
+
+   </p><p>Additionnaly, multiple-cases is translated like in C
+
+   </p><p><samp><span class="command">swith (variable){ case (value_1): ... break; default: ... ; } </span></samp>
+
+</p><div class="node">
+<a name="Functions"></a>
+<p></p><hr>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Loops-and-conditionnals">Loops and conditionnals</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Scripting">Scripting</a>
+
+</div>
+
+   <p>Functions are declared and implemeted together like this
+
+   </p><p><samp><span class="command">function_name(parameters):={ definition }</span></samp>
+
+   </p><p>Parameters are like local variables with an additional initialization
+from the values of the parameters inside the calling instruction.
+
+   </p><p><code>return return_value;</code> should be used to return the value
+of the function.
+
+   </p><p>It is not possible to pass arguments by reference, only by value.
+
+</p><div class="node">
+<a name="Environment"></a>
+<p></p><hr>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Scripting">Scripting</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Xcas">Xcas</a>
+
+</div>
+
+<h3 class="section">2.8 Environment variables</h3>
+
+<p>If one of these variables <code>GIAC_MAPLE</code>, <code>GIAC_MUPAD</code>,
+<code>GIAC_C</code> or <code>GIAC_TI</code> is defined, the corresponding
+syntax mode will be in effect. If <code>XCAS_RPN</code> is defined,
+then xcas will start in RPN mode.
+
+   </p><p>The variable <code>XCAS_ROOT</code> may be used for a custom xcas installation,
+it should point to the directory where xcas is installed. <code>XCAS_LOCALE</code>
+should point to the directory where the locales are. <code>XCAS_TMP</code>
+may be defined for temporary exchange files between xcas processes,
+if not defined it will use the home directory.
+
+   </p><p>The variable <code>PARI_SIZE</code> may be used to define the memory
+available for pari.
+
+   </p><p>The variable <code>BROWSER</code> may be used for the HTML documentation browser.
+
+   </p><p>The variable <code>LANG</code> may be used for internationalization.
+
+   </p><p>The variable <code>GIAC_TIME</code> and <code>GIAC_TEX</code> may be used
+in giac readline interface to ask for timing and tex output. 
+<code>GIAC_DEBUG</code> will give some info on the internals used.
+
+</p><div class="node">
+<a name="Giac"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Examples">Examples</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Xcas">Xcas</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Top">Top</a>
+
+</div>
+
+   <p>In this chapter we will first describe the generic data type of giac,
+the <code>gen</code> class. Then we describe the most important data
+types than <code>gen</code> dispatches to (polynomials, vectors, symbolic
+objects and gen unary functions). At this point, the reader should be
+able to code using <code>giac</code>, hence we describe how to integrate
+code to <code>giac</code> by inclusion in the library or as a separate
+runtime loadable library (called module). The last item describes
+how you can add new mathematical objects, e.g. quaternions,
+inside the <code>gen</code> type.
+
+</p><ul class="menu">
+<li><a accesskey="1" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#C_002b_002b">C++</a>:                        Why we choosed C++
+</li><li><a accesskey="2" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Gen">Gen</a>:                        The generic class used everywhere in giac
+</li><li><a accesskey="3" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Polynomials">Polynomials</a>:                Polynomials. 
+</li><li><a accesskey="4" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Vectors-and-matrices">Vectors and matrices</a>:       Vectors and matrices. 
+</li><li><a accesskey="5" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Symbolics">Symbolics</a>:                  Symbolics. 
+</li><li><a accesskey="6" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Unary-functions">Unary functions</a>:            Functions taking a gen and returning a gen
+</li><li><a accesskey="7" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Making-a-library-function">Making a library function</a>:  Add functionnalities to giac
+</li><li><a accesskey="8" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Making-modules">Making modules</a>:             Add dynamically loadable functions to giac
+</li><li><a accesskey="9" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#User-defined-data">User defined data</a>:          Define your own data inside giac
+</li></ul>
+
+<div class="node">
+<a name="C++"></a>
+<a name="C_002b_002b"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Gen">Gen</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Giac">Giac</a>
+
+</div>
+
+   <p>Giac uses the C++ language because it is easier to write algebraic
+operations using usual operators, for example <code>a+b*x</code> is easier
+to understand and modify than <code>add(a,mul(b,x))</code>, but it does not
+require that you learn object oriented programming. In fact it is more
+a C library using C++ features that makes programming easier (like the
+I/O streams and the Standard Template Library). However you will need
+a recent C++ compiler, e.g. <code>gcc</code> version 2.95 or later.
+
+</p><div class="node">
+<a name="Gen"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Polynomials">Polynomials</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#C_002b_002b">C++</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Giac">Giac</a>
+
+</div>
+
+<h2 class="chapter">3 The gen class</h2>
+
+<p><a name="index-gen-1"></a>
+<code>gen</code> is the class used to represent mathematical objects
+(<code>#include &lt;giac/gen.h&gt;</code>). It's a C union, made either of “direct”
+objects like <code>int</code> or <code>double</code>
+or of pointers to heap allocated objects that are reference counted. 
+Memory allocation is handled by the class itself (except for
+user-defined object types). You can check
+the actual type of a variable of type <code>gen</code>, e.g. <code>gen e;</code>,
+using it's <code>type</code> field (e.g. <code>if (e.type==...)</code>). This
+<code>type</code> field of a <code>gen</code> is an <code>int</code>.
+
+   </p><p>The <code>gen</code> might be~:
+     </p><ol type="1" start="1">
+<li>an immediate int (<code>e.type==_INT_</code>)
+</li><li>a double (<code>e.type==_DOUBLE_</code>)
+</li><li>an arbitrary precision integer (<code>e.type==_ZINT</code>)
+</li><li>a complex number (<code>e.type==_CPLX</code>), a pointer to
+two objects of type <code>gen</code> the real and imaginary parts
+</li><li>a global name (<code>e.type==_IDNT</code>), with a pointer to an
+<code>identificateur</code> type
+</li><li>a symbolic object (<code>e.type==_SYMB</code>), with a pointer to
+a <code>symbolic</code> type
+</li><li>a vector object (in fact it is a list) (<code>e.type==_VECT</code>),
+with a pointer to a <code>vecteur</code> type
+</li><li>a function object (<code>e.type==_FUNC</code>),
+with a pointer to a <code>unary_function_ptr</code> type
+        </li></ol>
+
+   <p>Some other types are available (e.g. a pointer to <code>gen_user</code>
+an object you can derive to make your own class, or arbitrary precision
+floating point numbers <code>_REAL</code>), for a complete
+description look at <code>giac/gen.h</code> (if you have installed <code>giac</code>
+the path to the include files is <code>/usr/local/include/giac</code> unless you
+override the default, if you did not install it, the path is the path
+to the <code>src</code> directory of the source code distribution).
+
+   </p><p>If you want to access the underlying type, after checking that the type
+is correct, you can do the following:
+     </p><ol type="1" start="1">
+<li>for immediate int: <code>int i=e.val;</code>
+</li><li>for double: <code>double d=e._DOUBLE_val;</code>
+</li><li>for arbitray precision integers: <code>mpz_t * m=e._ZINTptr;</code>
+</li><li>for complex numbers: <code>gen realpart=*e._CPLXptr,impart=*(e._CPLXptr+1); </code>
+</li><li>for identificateur: <code>identificateur i=*e._IDNTptr; </code>
+</li><li>for symbolics: <code>symbolic s=*e._SYMBptr;</code>
+</li><li>for composites: <code>vecteur v=*e._VECTptr;</code>
+</li><li>for function objects: <code>unary_function_ptr u=*e._FUNCptr</code>
+        </li></ol>
+
+   <p>In addition to the main <code>type</code>, each <code>gen</code> has a <code>subtype</code>. 
+This subtype is used sometimes to select different behaviour, e.g. 
+adding a constant to a vector might add the constant to all terms for
+some geometric objects represented using vectors, only to the term of
+the diagonal of a square matrix, or to the last term for dense polynomials. 
+See <code>giac/dispatch.h</code> for the description of the subtypes.
+
+</p><div class="node">
+<a name="Polynomials"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Vectors-and-matrices">Vectors and matrices</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Gen">Gen</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Giac">Giac</a>
+
+</div>
+
+   <p><a name="index-Polynomials-2"></a>
+
+</p><h3 class="section">3.1 Polynomials</h3>
+
+<p>Polynomials are available as:
+     </p><ul>
+<li>sparse multivariate polynomials <code>polynome</code>,
+header files are <code>gausspol.h</code>, <code>poly.h</code>, <code>monomial.h</code>
+</li><li>dense univariate polynomials: <code>poly1</code> or alias <code>modpoly</code>
+used for modular univariate polynomials. The type used is the same
+as for vectors and matrices. 
+Header files are <code>giac/modfactor.h</code> and <code>giac/modpoly.h</code>. 
+</li></ul>
+
+   <p>A <code>gen</code> can be a polynomials if it's <code>type</code> field is
+respectively <code>_POLY</code> (sparse) or <code>_VECT</code> (dense). 
+Conversion functions to and from the symbolic representation with
+respect to global names are declared in <code>giac/sym2poly.cc/h</code>.
+
+</p><div class="node">
+<a name="Vectors-and-matrices"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Symbolics">Symbolics</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Polynomials">Polynomials</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Giac">Giac</a>
+
+</div>
+
+   <p><a name="index-Vectors-3"></a><a name="index-Matrices-4"></a>
+
+</p><h3 class="section">3.2 Vectors and matrices</h3>
+
+<p>The type used for vectors and matrices is the same, it's a
+<code>std::vector&lt;gen&gt;</code> (unless you have configured with
+<code>--enable-debug</code>). The header file is <code>giac/vecteur.h</code>. 
+A <code>gen</code> can be a vector if it's <code>type</code> field is
+<code>_VECT</code>.
+
+</p><div class="node">
+<a name="Symbolics"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Unary-functions">Unary functions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Vectors-and-matrices">Vectors and matrices</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Giac">Giac</a>
+
+</div>
+
+   <p><a name="index-Symbolics-5"></a>
+
+</p><h3 class="section">3.3 Symbolics</h3>
+
+<p>Symbolic objects are trees. The <code>sommet</code> is a <code>unary_function_ptr</code>
+(a class pointing to the function). The <code>feuille</code> is either
+an atomic <code>gen</code> (for a function with one argument) or a composite
+(<code>feuille.type==_VECT</code>) for a function with more than one argument
+(these functions appears therefore as a function with one argument which
+is the list of all it's arguments).
+
+</p><div class="node">
+<a name="Unary-functions"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Making-a-library-function">Making a library function</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Symbolics">Symbolics</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Giac">Giac</a>
+
+</div>
+
+   <p><a name="index-Unary-functions-6"></a>
+
+</p><h3 class="section">3.4 Unary functions</h3>
+
+<p>In the giac library, every function is viewed as a function taking one
+argument and returning one argument. Almost every Xcas functions have
+a C++ equivalent with the same name preceded by a _. 
+If a Xcas function has more than one argument, these arguments
+are packed in a vector which is the first argument of the C++ function. 
+Most C++ functions require a second argument, which is
+a context pointer. This context pointer
+encapsulate all the context (e.g. complex vs real mode, or all the
+variables that are assigned or assumed). You can use
+<code>giac::context0</code> as global context pointer or define a context
+<code>giac::context ct;</code> and use <code>&amp;ct</code> as last argument to the function.
+
+   </p><p>The files <code>usual.cc/.h</code> give examples of declaration e.g. for
+exponential and trigonometric functions. Unary functions have the
+following members~:
+     </p><ul>
+<li>a fonction taking a <code>gen</code> and a <code>context *</code>
+and returning an <code>gen</code> which does the job
+</li><li>partial derivatives of this function if they exist
+</li><li>a special Taylor expansion if it's needed (see e.g. <code>taylor_asin</code>). 
+This is always the case if your function is defined at infinity. 
+Note that this function
+is called at initialization so that you can include code in it for
+example to add your function to the symbolic preprocessing step of the
+<code>limit/series</code> algorithm. 
+</li><li>a string identifier for printing. If you want the parser to
+recognize your function you must add a line in <code>input_lexer.ll</code>
+(see for example <code>"sin"</code>) or you must register it (see below). 
+</li><li>two special printing function if normal printing (normal printing
+means printing the function name followed by the argument(s) in parentheses)
+is not the right way to print. A null pointer means using normal
+printing. 
+</li></ul>
+   Once your <code>unary_function_eval</code> is defined, you must construct
+a <code>unary_function_ptr</code> to be able to use it inside symbolics. 
+When declaring the <code>unary_function_ptr</code>,
+you may give an optional argument to specify a behavior for the evaluation
+of arguments (quoting or special parser rules). 
+In this case, you may give a second optionnal argument
+to register your function dynamically in the list of function names
+recognized by the lexer. Be sure to link the object file so that
+initialization occurs after the initialization of <code>input_lexer.ll</code>,
+it means you must put your object file before <code>input_lexer.o</code>
+when linking (see for example the position of <code>moyal.o</code> in
+the <code>Makefile.am</code> file, <code>moyal</code>
+is one example where dynamic registering is done).
+
+   <p>You have of course the option to declare the function name
+statically in the file <code>input_lexer.ll</code> but this is not recommended.
+
+</p><div class="node">
+<a name="Making-a-library-function"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Making-modules">Making modules</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Unary-functions">Unary functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Giac">Giac</a>
+
+</div>
+
+   <p>Here is one example of a dynamically linkable function named
+<code>example</code> which takes 2 arguments and returns the sum divided
+by the product if the argument are integers and return itself otherwise. 
+The C++ header <code>example.h</code> code looks like
+</p><pre class="example">     #ifndef __EXAMPLE_H
+     #define __EXAMPLE_H
+     #include &lt;giac/config.h&gt;
+     #include &lt;giac/gen.h&gt;
+     #include &lt;giac/unary.h&gt;
+     
+     #ifndef NO_NAMESPACE_GIAC
+     namespace giac {
+     #endif // ndef NO_NAMESPACE_GIAC
+     
+       gen example(const gen &amp; a,const gen &amp; b,GIAC_CONTEXT);
+       gen _example(const gen &amp; args,GIAC_CONTEXT);
+       extern const unary_function_ptr * const at_example ;
+     
+     #ifndef NO_NAMESPACE_GIAC
+     } // namespace giac
+     #endif // ndef NO_NAMESPACE_GIAC
+     #endif // __EXAMPLE_H
+</pre>
+   <p>The C++ source code looks like:
+</p><pre class="example">     using namespace std;
+     #include "example.h"
+     #include &lt;giac/giac.h&gt;
+     
+     #ifndef NO_NAMESPACE_GIAC
+     namespace giac {
+     #endif // ndef NO_NAMESPACE_GIAC
+     
+       gen example(const gen &amp; a,const gen &amp; b,GIAC_CONTEXT){
+         if (is_integer(a) &amp;&amp; is_integer(b))
+           return (a+b)/(a*b);
+         return symbolic(at_example,makesequence(a,b));
+       }
+     
+       gen _example(const gen &amp; args,GIAC_CONTEXT){
+         if ( (args.type!=_VECT) || (args._VECTptr-&gt;size()!=2) )
+           return gensizeerr(contextptr); // type checking : args must be a vector of size 2
+         vecteur &amp; v=*args._VECTptr;
+         return example(v[0],v[1],contextptr);
+       }
+       const string _example_s("example");
+       static define_unary_function_eval (__example,&amp;_example,_example_s);
+       define_unary_function_ptr5( at_example ,alias_at_example,&amp;__example,0,true);
+     
+     #ifndef NO_NAMESPACE_GIAC
+     }
+     #endif // ndef NO_NAMESPACE_GIAC
+</pre>
+   <p>Compile it with
+</p><pre class="example">     c++ -g -c example.cc
+</pre>
+   <p>To test your code, you should write the following <code>test.cc</code> program
+</p><pre class="example">     #include "example.h"
+     
+     using namespace std;
+     using namespace giac;
+     
+     int main(){
+       gen args;
+       context ct;
+       cout &lt;&lt; "Enter arguments of example function, for example 2,3 ";
+       cin &gt;&gt; args;
+       cout &lt;&lt; "Result: " &lt;&lt; _example(args,&amp;ct) &lt;&lt; endl;
+     }
+</pre>
+   <p>Compile it with the command
+</p><pre class="example">     c++ -g example.o test.cc -lgiac -lgmp
+</pre>
+   <p>You might need to link to other libraries e.g. 
+<code>-lreadline -lhistory -lcurses</code> depedning on your installation. 
+Then run <code>a.out</code>. Here you would test e.g. with <code>[1,2]</code>.
+
+   </p><p>You can debug your program as usual, e.g. with
+<code>gdb a.out</code>, it is recommended to create a <code>.gdbinit</code> file
+in the current directory so that you can use the <code>v</code> command
+to print giac data, the <code>.gdbinit</code> file should contain :
+</p><pre class="example">     echo Defining v as print command for giac types\n
+     define v
+     print ($arg0).dbgprint()
+     end
+</pre>
+   <p>When your function is tested, you can add it to the library. Edit
+the file <code>Makefile.am</code> of the <code>src</code> subdirectory
+of <code>giac</code> : just add <code>example.cc</code> before <code>input_lexer.cc</code>
+in the <code>libgiac_la_SOURCES</code> line and add <code>example.h</code> in the
+<code>giacinclude_HEADERS</code> line.
+
+   </p><p>To rebuild the library go in the <code>giac</code> directory and type
+<code>automake; make</code>
+
+   </p><p>If you want to share your function(s) with other people, you must
+license it under the GPL (because it will be linked to GPL-ed code). 
+Add the GPL header to the files, and send them to the <code>giac</code>
+contribution e-mail, currently <code>mailto:parisse@fourier.univ-grenoble-alpes.fr</code>
+</p><pre class="example">     /*
+      *  Copyright (C) 2007 Your name
+      *
+      *  This program is free software; you can redistribute it and/or modify
+      *  it under the terms of the GNU General Public License as published by
+      *  the Free Software Foundation; either version 3 of the License, or
+      *  (at your option) any later version.
+      *
+      *  This program is distributed in the hope that it will be useful,
+      *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+      *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+      *  GNU General Public License for more details.
+      *
+      *  You should have received a copy of the GNU General Public License
+      *  along with this program; if not, write to the Free Software
+      *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+      */
+</pre>
+   <div class="node">
+<a name="Making-modules"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#User-defined-data">User defined data</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Making-a-library-function">Making a library function</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Giac">Giac</a>
+
+</div>
+
+   <p>Another way to share your code could be to build a dynamic library
+that can be loaded at runtime using facilities of <code>&lt;dlfcns.h&gt;</code>. 
+Warning: modules do not work with static binaries. Be sure
+to have dynamic binaries (this is the default when you compile giac,
+but the packaged <code>xcas</code> distributed as a binary is build static to
+avoid incompatible libraries).
+
+   </p><p>Let us define a function named <code>mydll</code> in the file <code>mydll.cc</code> like
+this :
+</p><pre class="example">     #include &lt;giac/config.h&gt;
+     #include &lt;giac/giac.h&gt;
+     
+     #ifndef NO_NAMESPACE_GIAC
+     namespace giac {
+     #endif // ndef NO_NAMESPACE_GIAC
+     
+       const string _mydll_s("mydll");
+       gen _mydll(const gen &amp; args,GIAC_CONTEXT){
+         return sin(ln(args,contextptr),contextptr);
+       }
+       unary_function_eval __mydll(0,&amp;giac::_mydll,_mydll_s);
+       unary_function_ptr at_mydll (&amp;__mydll,0,true); // auto-register
+     
+     #ifndef NO_NAMESPACE_GIAC
+     } // namespace giac
+     #endif // ndef NO_NAMESPACE_GIAC
+</pre>
+   <p>Compile it like this
+</p><pre class="example">     c++ -fPIC -DPIC -g -c mydll.cc -o mydll.lo
+     cc -shared  mydll.lo  -lc  -Wl,-soname -Wl,libgiac_mydll.so.0 -o libgiac_mydll.so.0.0.0
+     rm -f libgiac_mydll.so.0 &amp;&amp; ln -s libgiac_mydll.so.0.0.0 libgiac_mydll.so.0
+     rm -f libgiac_mydll.so &amp;&amp; ln -s libgiac_mydll.so.0.0.0 libgiac_mydll.so
+</pre>
+   <p>The library is loadable at runtime in a session using the command
+<code>insmod("mydll")</code>
+assuming it is stored in a directory available
+from <code>LD_LIBRARY_PATH</code> or in <code>/etc/ld.so.conf</code> otherwise
+you must put a path to the library file (beginning with <code>./</code> if
+it is in the current directory), something like
+<code>insmod("/path_to/libgiac_mydll.so")</code>
+
+   </p><p>A nice way to test your code is to add the following line in your
+<code>~/.xcasrc</code> file :
+</p><pre class="example">     insmod("path_to_libmydll/libmydll.so");
+</pre>
+   <p>where you replace <code>path_to_libmydll.so</code> with the actual path to
+<code>libmydll.so</code> for example <code>/home/joe</code> if your login name is
+<code>joe</code> and <code>mydll</code> is in your home directory. 
+Then if you are using <code>emacs</code> as editor, put as first line of
+the file <code>mydll.cc</code>
+</p><pre class="example">     // -*- mode:C++ ; compile-command: "g++ -I.. -fPIC -DPIC -g -c mydll.cc -o mydll.lo &amp;&amp; ln -sf mydll.lo mydll.o &amp;&amp; gcc -shared mydll.lo -lc  -Wl,-soname -Wl,libmydll.so.0 -o libmydll.so.0.0.0 &amp;&amp; ln -sf libmydll.so.0.0.0 libmydll.so.0 &amp;&amp; ln -sf libmydll.so.0.0.0 libmydll.so" -*-
+</pre>
+   <p>Now you can compile it with <code>Compile</code> of the menu <code>Tools</code>
+and the resulting code is automatically loaded when you launch a new
+session with <code>xcas</code> or <code>cas</code> which makes testing a breath.
+
+</p><div class="node">
+<a name="User-defined-data"></a>
+<p></p><hr>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Making-modules">Making modules</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Giac">Giac</a>
+
+</div>
+
+   <p><a name="index-User-defined-data-7"></a>
+
+</p><h3 class="section">3.5 User defined data</h3>
+
+<p>The class <code>gen_user</code> can be derived so that you can include
+your own data inside <code>gen</code>. Look at the declaration of <code>gen_user</code>
+in the file <code>gen.h</code> and at the example of the quaternions
+in the files <code>quater.h</code> and <code>quater.cc</code>.
+
+</p><div class="node">
+<a name="Examples"></a>
+<p></p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Concept-Index">Concept Index</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Giac">Giac</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Top">Top</a>
+
+</div>
+
+<h2 class="chapter">4 Some examples of C++ program using giac</h2>
+
+<ul class="menu">
+<li><a accesskey="1" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#First-example">First example</a>
+</li></ul>
+
+<div class="node">
+<a name="First-example"></a>
+<p></p><hr>
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Examples">Examples</a>
+
+</div>
+
+<h2 class="chapter">5 A first simple example</h2>
+
+<p>Type the following text with your favorite editor
+
+</p><pre class="smallexample">     #include &lt;giac/config.h&gt;
+     #include &lt;giac/giac.h&gt;
+     using namespace std;
+     using namespace giac;
+     
+     int main(){
+       context ct;
+       gen e("x^2-1",&amp;ct);
+       e=eval(e,1,&amp;ct);
+       cout &lt;&lt; _factor(e,&amp;ct) &lt;&lt; endl;
+     }
+</pre>
+   <p>save it e.g. as <code>tryit.cc</code> and compile it with
+
+   </p><p><samp><span class="command">c++ -g tryit.cc -lgiac -lgmp</span></samp>
+
+   </p><p>If you get unresolved symbol, then <code>readline</code> is probably enabled
+and you should compile like that
+
+   </p><p><samp><span class="command">c++ -g tryit.cc -lgiac -lgmp -lreadline -lcurses</span></samp>
+
+   </p><p>You can now run <code>a.out</code> which will print the factorisation of
+<code>x^2-1</code>.
+
+   </p><p>You can also run the program step by step using gdb. We
+recommended that you copy the file <code>.gdbinit</code> from the <code>src</code>
+directory of the giac distribution, because it enables using
+<code>v varname</code> to print the variable <code>varname</code> of type <code>gen</code>.
+
+   </p><p>Some explanations of the code:
+     </p><ul>
+<li>the <code>#include &lt;giac/giac.h&gt;</code>
+directive includes all the headers of giac (which includes some STL
+headers like <code>string</code> or <code>vector</code>). 
+</li><li>The <code>using namespace</code>
+directive are not mandatory, if you don't use them, you need to modify
+some of the code, e.g. use <code>std::string</code> instead of <code>string</code>
+or <code>giac::gen</code> instead of <code>gen</code>. 
+</li><li>Variables of type <code>gen</code>
+can be constructed from strings (using the parser), from some C types
+(like <code>int</code> or <code>double</code>), from the STL type
+<code>std::complex&lt;double&gt;</code> or from streams (using the parser). 
+</li><li>Operations like <code>+, -, *</code> are defined on the <code>gen</code> type
+but the division is not redefined to avoid confusion between integers
+(use <code>iquo</code>) and double C division (use <code>rdiv</code>). For powers,
+use <code>pow</code> as usual. 
+</li></ul>
+
+<div class="node">
+<a name="Concept-Index"></a>
+<p></p><hr>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Examples">Examples</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Top">Top</a>
+
+</div>
+
+<!-- node-name,    next,  previous, up -->
+<h2 class="unnumbered">Concept Index</h2>
+
+<ul class="index-cp" compact="">
+<li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#index-gen-1">gen</a>: <a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Gen">Gen</a></li>
+<li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#index-Matrices-4">Matrices</a>: <a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Vectors-and-matrices">Vectors and matrices</a></li>
+<li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#index-Polynomials-2">Polynomials</a>: <a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Polynomials">Polynomials</a></li>
+<li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#index-Symbolics-5">Symbolics</a>: <a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Symbolics">Symbolics</a></li>
+<li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#index-Unary-functions-6">Unary functions</a>: <a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Unary-functions">Unary functions</a></li>
+<li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#index-User-defined-data-7">User defined data</a>: <a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#User-defined-data">User defined data</a></li>
+<li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#index-Vectors-3">Vectors</a>: <a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Vectors-and-matrices">Vectors and matrices</a></li>
+</ul>
+<div class="contents">
+<h2>Table of Contents</h2>
+<ul>
+<li><a name="toc_Installation" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Installation">1 Installing Giac/Xcas</a>
+<ul>
+<li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Binaries">1.1 Installing binaries</a>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Requirements">1.2 Requirements</a>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Options">1.3 Options</a>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Configure">1.4 Configure options</a>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Compiling">1.5 Compiling</a>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Troubles">1.6 Troubles</a>
+</li></ul>
+</li><li><a name="toc_Xcas" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Xcas">2 Using xcas, an user-interface to giac</a>
+<ul>
+<li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Interface">2.1 The interface</a>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#CAS">2.2 Computer algebra system commands</a>
+<ul>
+<li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Math-menu">2.2.1 Basic mathematic commands</a>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Arithmetic">2.2.2 Arithmetic of integers and polynomials</a>
+<ul>
+<li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Integer-arithmetic">2.2.2.1 Integer arithmetic functions</a>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Division">2.2.2.2 Euclidean integer division</a>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Gcd">2.2.2.3 Integer gcd</a>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Primality">2.2.2.4 Primality and factorization</a>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Other-integer">2.2.2.5 Other integer functions (Legendre, Jacobi, ...)</a>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Polynomial-arithmetic">2.2.2.6 Polynomial arithmetic functions</a>
+</li></ul>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Cas-menu">2.2.3 Algebra, calculus, ...</a>
+<ul>
+<li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Rewriting">2.2.3.1 Rewriting expressions</a>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Diff-and-integrate">2.2.3.2 Derivation, integration</a>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Limits-and-series">2.2.3.3 Limits, series expansion.</a>
+</li></ul>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Solving-equations">2.2.4 Solving equations</a>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Linear-algebra">2.2.5 Linear algebra</a>
+</li></ul>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Geometry">2.3 Geometry</a>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Spreadsheet">2.4 Spreadsheet</a>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Scripting">2.5 The xcas scripting language</a>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Language-mode">2.6 Selecting the language mode</a>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Data">2.7 Data</a>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Environment">2.8 Environment variables</a>
+</li></ul>
+</li><li><a name="toc_Gen" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Gen">3 The gen class</a>
+<ul>
+<li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Polynomials">3.1 Polynomials</a>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Vectors-and-matrices">3.2 Vectors and matrices</a>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Symbolics">3.3 Symbolics</a>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Unary-functions">3.4 Unary functions</a>
+</li><li><a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#User-defined-data">3.5 User defined data</a>
+</li></ul>
+</li><li><a name="toc_Examples" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Examples">4 Some examples of C++ program using giac</a>
+</li><li><a name="toc_First-example" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#First-example">5 A first simple example</a>
+</li><li><a name="toc_Concept-Index" href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/giac_us.html#Concept-Index">Concept Index</a>
+</li></ul>
+</div>
+
+
+
+
+<protonpass-root-2711 data-protonpass-role="root" data-protonpass-theme="os"><template shadowrootmode="closed"></template></protonpass-root-2711></body></html>
